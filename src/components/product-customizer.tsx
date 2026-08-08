@@ -413,15 +413,15 @@ function PackagingPreview({
 }) {
   return (
     <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-[1.75rem] bg-[radial-gradient(circle_at_top,_#fff_0%,_#f5f0e9_48%,_#ece5db_100%)]">
-      <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-stone-900/10 blur-2xl" />
+      <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-zinc-900/10 blur-2xl" />
       <PackagingShell kind={kind} accent={accent} />
       <div
-        className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/75 px-2 text-center shadow-sm ${logoPositions[kind][placement]} relative`}
+        className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/75 px-2 text-center shadow-sm transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
       >
         {logoPreview ? (
           <Image src={logoPreview} alt="Uploaded logo preview" fill unoptimized className="object-contain p-1" />
         ) : (
-          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-stone-700">Your Logo</span>
+          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-700">Your Logo</span>
         )}
       </div>
     </div>
@@ -494,13 +494,13 @@ function FormInput({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-stone-300">{label}</span>
+      <span className="text-sm font-medium text-zinc-300">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-2xl border border-stone-700 bg-stone-900 px-4 py-3 text-sm text-white outline-none transition focus:border-stone-400"
+        className="mt-2 w-full rounded-2xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-sm text-white outline-none transition focus:border-zinc-400 focus:bg-zinc-900 placeholder:text-zinc-600"
       />
     </label>
   );
@@ -519,13 +519,13 @@ function FormTextArea({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-stone-300">{label}</span>
+      <span className="text-sm font-medium text-zinc-300">{label}</span>
       <textarea
         rows={4}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-2xl border border-stone-700 bg-stone-900 px-4 py-3 text-sm text-white outline-none transition focus:border-stone-400"
+        className="mt-2 w-full rounded-2xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-sm text-white outline-none transition focus:border-zinc-400 focus:bg-zinc-900 placeholder:text-zinc-600"
       />
     </label>
   );
