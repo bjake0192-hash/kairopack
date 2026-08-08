@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { ChangeEvent, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { UploadCloud, CheckCircle2 } from "lucide-react";
 import {
   customDesignFee,
   placementOptions,
@@ -168,23 +170,26 @@ export function ProductCustomizer() {
   }
 
   return (
-    <section id="customizer" className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-      <div className="rounded-[2rem] border border-zinc-200 bg-white p-6 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
+    <section id="customizer" className="grid gap-12 lg:grid-cols-[1fr_0.85fr]">
+      <div className="rounded-[3rem] border border-[#111111]/10 bg-white p-8 lg:p-12 shadow-2xl relative overflow-hidden">
+        {/* Subtle decorative background */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#f4f3ef] rounded-full blur-3xl opacity-50 pointer-events-none -translate-y-1/2 translate-x-1/3" />
+        
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 relative z-10">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-3">
-              Live Preview
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[#111111]/50 mb-4">
+              Step 1: Configuration
             </p>
-            <h2 className="text-3xl font-semibold text-zinc-950 tracking-tight">
+            <h2 className="text-4xl font-semibold text-[#111111] tracking-tighter-plus">
               Select product & upload
             </h2>
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-zinc-500">
+          <p className="max-w-xs text-sm leading-relaxed text-[#111111]/70 font-medium">
             Upload your artwork to instantly verify placement and scale before requesting production.
           </p>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 mb-8">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 mb-12 relative z-10">
           {products.map((item) => {
             const isSelected = item.id === product.id;
 
@@ -193,76 +198,99 @@ export function ProductCustomizer() {
                 key={item.id}
                 type="button"
                 onClick={() => handleProductChange(item.id)}
-                className={`group rounded-2xl border px-5 py-5 text-left transition-all duration-300 ${
+                className={`group relative rounded-2xl border px-6 py-6 text-left transition-all duration-500 overflow-hidden ${
                   isSelected
-                    ? "border-zinc-950 bg-zinc-950 text-white shadow-md"
-                    : "border-zinc-200 bg-zinc-50/50 text-zinc-700 hover:border-zinc-300 hover:bg-white"
+                    ? "border-[#111111] bg-[#111111] text-white shadow-xl"
+                    : "border-[#111111]/10 bg-[#f4f3ef]/50 text-[#111111] hover:border-[#111111]/30 hover:bg-white"
                 }`}
               >
-                <p className="text-sm font-semibold tracking-tight">{item.name}</p>
-                <p className={`mt-1.5 text-xs leading-relaxed ${isSelected ? "text-zinc-400" : "text-zinc-500 group-hover:text-zinc-600"}`}>
-                  {item.description}
-                </p>
+                {isSelected && (
+                  <motion.div 
+                    layoutId="active-product-bg"
+                    className="absolute inset-0 bg-[#111111]"
+                    initial={false}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <div className="relative z-10">
+                  <p className="text-base font-semibold tracking-tight">{item.name}</p>
+                  <p className={`mt-2 text-xs leading-relaxed ${isSelected ? "text-white/70" : "text-[#111111]/60"}`}>
+                    {item.description}
+                  </p>
+                </div>
               </button>
             );
           })}
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.45fr]">
-          <div className="flex flex-col gap-4">
+        <div className="grid gap-8 lg:grid-cols-[1fr_0.45fr] relative z-10">
+          <div className="flex flex-col gap-6">
             <PackagingPreview kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
 
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-zinc-200 bg-zinc-50/50 px-6 py-5">
-              <div>
-                <p className="text-sm font-semibold text-zinc-900 tracking-tight">Upload your logo</p>
-                <p className="mt-1 text-xs text-zinc-500">PNG, JPG, or SVG from your device.</p>
+            <div className="flex flex-wrap items-center justify-between gap-6 rounded-3xl border border-[#111111]/10 bg-[#f4f3ef]/80 backdrop-blur-sm px-8 py-6">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm">
+                  <UploadCloud className="w-5 h-5 text-[#111111]" />
+                </div>
+                <div>
+                  <p className="text-base font-semibold text-[#111111] tracking-tight">Upload your logo</p>
+                  <p className="mt-1 text-xs text-[#111111]/60 font-medium">PNG, JPG, or SVG from your device.</p>
+                </div>
               </div>
-              <label className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white border border-zinc-200 shadow-sm px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50 active:scale-[0.98]">
-                Choose file
+              <label className="group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white border border-[#111111]/10 shadow-sm px-8 py-3 text-xs font-bold uppercase tracking-widest text-[#111111] transition hover:shadow-md">
+                <span className="relative z-10 group-hover:text-white transition-colors duration-300">Choose file</span>
+                <div className="absolute inset-0 h-full w-full scale-0 rounded-full bg-[#111111] transition-all duration-300 ease-out group-hover:scale-100" />
                 <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
               </label>
             </div>
 
-            <p className="text-xs text-zinc-400 px-2">
-              {logoName ? `Current file: ${logoName}` : "No artwork uploaded yet. A text placeholder is shown until you add a logo."}
+            <p className="text-[10px] uppercase tracking-widest font-bold text-[#111111]/40 px-4">
+              {logoName ? (
+                <span className="flex items-center gap-2 text-[#d9534f]">
+                  <CheckCircle2 className="w-3 h-3" /> Current file: {logoName}
+                </span>
+              ) : "No artwork uploaded yet. A text placeholder is shown."}
             </p>
           </div>
 
-          <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 flex flex-col justify-between">
+          <div className="rounded-3xl border border-[#111111]/10 bg-white p-8 flex flex-col justify-between shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-3">Spec Sheet</p>
-              <h3 className="text-xl font-semibold text-zinc-950 tracking-tight mb-2">{product.name}</h3>
-              <p className="text-sm leading-relaxed text-zinc-600 mb-8">{product.description}</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#111111]/50 mb-4">Spec Sheet</p>
+              <h3 className="text-2xl font-semibold text-[#111111] tracking-tighter-plus mb-3">{product.name}</h3>
+              <p className="text-sm leading-relaxed text-[#111111]/70 mb-10 font-medium">{product.description}</p>
             </div>
 
-            <dl className="grid gap-5 text-sm">
-              <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
-                <dt className="text-zinc-500">Lead time</dt>
-                <dd className="font-medium text-zinc-950">{product.leadTime}</dd>
+            <dl className="grid gap-6 text-sm font-medium">
+              <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
+                <dt className="text-[#111111]/60">Lead time</dt>
+                <dd className="text-[#111111]">{product.leadTime}</dd>
               </div>
-              <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
-                <dt className="text-zinc-500">Minimum order</dt>
-                <dd className="font-medium text-zinc-950">{product.minOrder} units</dd>
+              <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
+                <dt className="text-[#111111]/60">Minimum order</dt>
+                <dd className="text-[#111111]">{product.minOrder} units</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-zinc-500">Finish</dt>
-                <dd className="font-medium text-zinc-950">{product.finish}</dd>
+                <dt className="text-[#111111]/60">Finish</dt>
+                <dd className="text-[#111111]">{product.finish}</dd>
               </div>
             </dl>
           </div>
         </div>
       </div>
 
-      <div className="rounded-[2rem] bg-zinc-950 p-6 lg:p-10 text-white shadow-2xl flex flex-col">
-        <div className="mb-8">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-3">Quote & Order</p>
-          <h2 className="text-2xl font-semibold tracking-tight">Turn the preview into production</h2>
+      <div className="rounded-[3rem] bg-[#111111] p-8 lg:p-12 text-white shadow-2xl flex flex-col relative overflow-hidden">
+        {/* Subtle decorative background for dark section */}
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/4" />
+
+        <div className="mb-12 relative z-10">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-4">Step 2: Quote & Order</p>
+          <h2 className="text-4xl font-semibold tracking-tighter-plus">Turn the preview into production</h2>
         </div>
 
-        <div className="space-y-8 flex-1">
+        <div className="space-y-10 flex-1 relative z-10">
           <div>
-            <p className="text-sm font-medium text-zinc-300 mb-3">Logo placement</p>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Logo placement</p>
+            <div className="grid gap-4 sm:grid-cols-3">
               {placementOptions.map((option) => {
                 const isSelected = option.value === placement;
 
@@ -271,57 +299,70 @@ export function ProductCustomizer() {
                     key={option.value}
                     type="button"
                     onClick={() => setPlacement(option.value)}
-                    className={`rounded-xl border px-4 py-3 text-center transition-all duration-200 ${
+                    className={`relative rounded-2xl border px-5 py-4 text-center transition-all duration-300 overflow-hidden ${
                       isSelected
-                        ? "border-white bg-white text-zinc-950"
-                        : "border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:border-zinc-600 hover:bg-zinc-800"
+                        ? "border-transparent text-[#111111]"
+                        : "border-white/10 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10"
                     }`}
                   >
-                    <p className="text-sm font-semibold tracking-tight">{option.label}</p>
-                    <p className={`mt-1 text-[11px] ${isSelected ? "text-zinc-500" : "text-zinc-500"}`}>
-                      {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
-                    </p>
+                    {isSelected && (
+                      <motion.div 
+                        layoutId="active-placement-bg"
+                        className="absolute inset-0 bg-[#f4f3ef]"
+                        initial={false}
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <div className="relative z-10">
+                      <p className="text-sm font-semibold tracking-tight">{option.label}</p>
+                      <p className={`mt-1 text-[10px] uppercase tracking-widest font-bold ${isSelected ? "text-[#111111]/50" : "text-white/40"}`}>
+                        {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
+                      </p>
+                    </div>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-[1fr_auto] items-end">
+          <div className="grid gap-6 sm:grid-cols-[1fr_auto] items-end">
             <label className="block">
-              <span className="text-sm font-medium text-zinc-300">Quantity</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4 block">Quantity</span>
               <input
                 type="number"
                 min={product.minOrder}
                 step={50}
                 value={quantity}
                 onChange={(event) => setQuantity(Math.max(product.minOrder, Number(event.target.value) || product.minOrder))}
-                className="mt-2 w-full rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-white outline-none transition focus:border-zinc-400 focus:bg-zinc-900"
+                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white text-lg font-semibold outline-none transition focus:border-[#d9534f] focus:bg-white/10 focus:ring-1 focus:ring-[#d9534f]"
               />
             </label>
-            <p className="rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-sm text-zinc-400 font-medium">
-              MOQ: {product.minOrder}
-            </p>
+            <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 flex items-center h-[62px]">
+              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
+                MOQ: {product.minOrder}
+              </p>
+            </div>
           </div>
 
-          <label className="flex items-start gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5 cursor-pointer group hover:bg-zinc-900/60 transition">
-            <div className="pt-0.5">
+          <label className="flex items-start gap-5 rounded-3xl border border-white/10 bg-white/5 p-6 cursor-pointer group hover:bg-white/10 hover:border-white/20 transition-all">
+            <div className="pt-1">
               <input
                 type="checkbox"
                 checked={customDesign}
                 onChange={(event) => setCustomDesign(event.target.checked)}
-                className="h-4 w-4 rounded border-zinc-700 bg-zinc-950 text-white accent-white focus:ring-white focus:ring-offset-zinc-950"
+                className="h-5 w-5 rounded border-white/20 bg-transparent text-[#d9534f] focus:ring-[#d9534f] focus:ring-offset-[#111111]"
               />
             </div>
-            <span className="text-sm leading-relaxed text-zinc-400">
-              Add a one-off custom design service for <strong className="text-white font-medium">{currency.format(customDesignFee)}</strong>.
+            <span className="text-sm leading-relaxed text-white/70 font-medium">
+              Add a one-off custom design service for <strong className="text-white font-semibold">{currency.format(customDesignFee)}</strong>.
               We turn the uploaded logo into a fully branded pack concept before production.
             </span>
           </label>
 
-          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
-            <p className="text-sm font-semibold text-zinc-300 tracking-tight mb-4">Approximate quote</p>
-            <div className="space-y-3 text-sm text-zinc-400">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#d9534f] rounded-full blur-[80px] opacity-20 pointer-events-none" />
+            <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6">Approximate quote</p>
+            <div className="space-y-4 text-sm text-white/70 font-medium">
               <div className="flex items-center justify-between">
                 <span>Base rate per 100</span>
                 <span>{currency.format(product.basePrice)}</span>
@@ -332,22 +373,22 @@ export function ProductCustomizer() {
               </div>
               <div className="flex items-center justify-between">
                 <span>Production subtotal</span>
-                <span className="text-zinc-300">{currency.format(quote.subtotal)}</span>
+                <span className="text-white">{currency.format(quote.subtotal)}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Custom design</span>
                 <span>{customDesign ? currency.format(customDesignFee) : "Not added"}</span>
               </div>
-              <div className="flex items-center justify-between border-t border-zinc-800 pt-4 mt-4 text-base font-semibold text-white">
+              <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-6 text-xl font-semibold text-white tracking-tighter-plus">
                 <span>Total estimate</span>
                 <span>{currency.format(quote.total)}</span>
               </div>
             </div>
           </div>
 
-          <div className="space-y-4 pt-4">
-            <p className="text-sm font-semibold text-zinc-300 tracking-tight">Shipping Details</p>
-            <div className="grid gap-4">
+          <div className="space-y-6 pt-6">
+            <p className="text-xs font-bold uppercase tracking-widest text-white/50">Shipping Details</p>
+            <div className="grid gap-5">
               <FormInput
                 label="Buyer name"
                 value={orderForm.buyerName}
@@ -386,14 +427,28 @@ export function ProductCustomizer() {
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full rounded-xl bg-white px-5 py-4 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 mt-4"
+            className="w-full relative group inline-flex h-16 items-center justify-center overflow-hidden rounded-2xl bg-[#d9534f] px-8 font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 mt-8"
           >
-            {isSubmitting ? "Submitting order..." : "Submit order to vendor queue"}
+            <span className="relative z-10 text-sm uppercase tracking-widest font-bold">
+              {isSubmitting ? "Processing..." : "Submit to Production Queue"}
+            </span>
+            {!isSubmitting && (
+              <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl bg-white/20 transition-all duration-300 ease-out group-hover:scale-100" />
+            )}
           </button>
 
-          {submitMessage && (
-            <p className="text-sm text-center font-medium text-white bg-zinc-800 py-3 rounded-lg border border-zinc-700">{submitMessage}</p>
-          )}
+          <AnimatePresence>
+            {submitMessage && (
+              <motion.p 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="text-xs font-bold uppercase tracking-widest text-center text-white/90 bg-white/10 py-4 rounded-xl border border-white/20 mt-6"
+              >
+                {submitMessage}
+              </motion.p>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </section>
@@ -494,13 +549,13 @@ function FormInput({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-zinc-300">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-3 block">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-2xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-sm text-white outline-none transition focus:border-zinc-400 focus:bg-zinc-900 placeholder:text-zinc-600"
+        className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm text-white font-medium outline-none transition focus:border-[#d9534f] focus:bg-white/10 focus:ring-1 focus:ring-[#d9534f] placeholder:text-white/30"
       />
     </label>
   );
@@ -519,13 +574,13 @@ function FormTextArea({
 }) {
   return (
     <label className="block">
-      <span className="text-sm font-medium text-zinc-300">{label}</span>
+      <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-3 block">{label}</span>
       <textarea
         rows={4}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="mt-2 w-full rounded-2xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-sm text-white outline-none transition focus:border-zinc-400 focus:bg-zinc-900 placeholder:text-zinc-600"
+        className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm text-white font-medium outline-none transition focus:border-[#d9534f] focus:bg-white/10 focus:ring-1 focus:ring-[#d9534f] placeholder:text-white/30 resize-none"
       />
     </label>
   );
