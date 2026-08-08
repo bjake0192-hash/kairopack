@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ChangeEvent, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { UploadCloud, CheckCircle2 } from "lucide-react";
+import { UploadCloud, CheckCircle2, Lock, Type, Palette, ArrowRight } from "lucide-react";
 import {
   customDesignFee,
   placementOptions,
@@ -26,26 +26,33 @@ const currency = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 0,
 });
 
+const productImages: Record<string, string> = {
+  "double-wall-cup": "https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&q=80&w=600",
+  "salad-bowl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600",
+  "burger-box": "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=600",
+  "carrier-bag": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600"
+};
+
 const logoPositions: Record<ProductKind, Record<LogoPlacement, string>> = {
   cup: {
-    top: "top-[18%] left-1/2 h-16 w-24 -translate-x-1/2",
-    middle: "top-[37%] left-1/2 h-20 w-28 -translate-x-1/2",
-    bottom: "top-[58%] left-1/2 h-16 w-24 -translate-x-1/2",
+    top: "top-[25%] left-1/2 h-16 w-24 -translate-x-1/2",
+    middle: "top-[40%] left-1/2 h-20 w-28 -translate-x-1/2",
+    bottom: "top-[60%] left-1/2 h-16 w-24 -translate-x-1/2",
   },
   bowl: {
-    top: "top-[27%] left-1/2 h-14 w-32 -translate-x-1/2",
-    middle: "top-[44%] left-1/2 h-16 w-36 -translate-x-1/2",
-    bottom: "top-[61%] left-1/2 h-12 w-32 -translate-x-1/2",
+    top: "top-[30%] left-1/2 h-14 w-32 -translate-x-1/2",
+    middle: "top-[45%] left-1/2 h-16 w-36 -translate-x-1/2",
+    bottom: "top-[60%] left-1/2 h-12 w-32 -translate-x-1/2",
   },
   box: {
-    top: "top-[19%] left-1/2 h-14 w-32 -translate-x-1/2",
-    middle: "top-[43%] left-1/2 h-20 w-36 -translate-x-1/2",
+    top: "top-[25%] left-1/2 h-14 w-32 -translate-x-1/2",
+    middle: "top-[45%] left-1/2 h-20 w-36 -translate-x-1/2",
     bottom: "top-[65%] left-1/2 h-12 w-28 -translate-x-1/2",
   },
   bag: {
-    top: "top-[26%] left-1/2 h-14 w-24 -translate-x-1/2",
+    top: "top-[30%] left-1/2 h-14 w-24 -translate-x-1/2",
     middle: "top-[45%] left-1/2 h-20 w-28 -translate-x-1/2",
-    bottom: "top-[67%] left-1/2 h-12 w-24 -translate-x-1/2",
+    bottom: "top-[65%] left-1/2 h-12 w-24 -translate-x-1/2",
   },
 };
 
@@ -106,7 +113,7 @@ export function ProductCustomizer() {
     }
 
     if (!file.type.startsWith("image/")) {
-      setSubmitMessage("Please upload an image file for the logo preview.");
+      setSubmitMessage("Upload failed. Please try another file.");
       return;
     }
 
@@ -129,6 +136,11 @@ export function ProductCustomizer() {
   }
 
   async function handleSubmit() {
+    if (quantity < product.minOrder) {
+      setSubmitMessage(`Minimum order: ${product.minOrder} units.`);
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitMessage("");
 
@@ -170,286 +182,327 @@ export function ProductCustomizer() {
   }
 
   return (
-    <section id="customizer" className="grid gap-12 lg:grid-cols-[1fr_0.85fr]">
-      <div className="rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm relative overflow-hidden">
+    <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] items-start relative">
+      {/* LEFT PANEL: Workspace */}
+      <div className="flex flex-col gap-16">
         
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 relative z-10">
-          <div>
-            <p className="text-sm font-medium text-zinc-500 mb-2">
-              Step 1: Configuration
-            </p>
-            <h2 className="text-3xl font-bold text-zinc-950">
-              Select product & upload
-            </h2>
+        {/* Product Selection */}
+        <section>
+          <div className="mb-8">
+            <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">01 / Select Product</p>
+            <h2 className="text-3xl font-bold text-[#0B0B0B] tracking-tight mb-2">Select a product</h2>
+            <p className="text-[#71717A] text-base">Choose the packaging format that best suits your product.</p>
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-zinc-600">
-            Upload your artwork to instantly verify placement and scale before requesting production.
-          </p>
-        </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 mb-12 relative z-10">
-          {products.map((item) => {
-            const isSelected = item.id === product.id;
+          <div className="grid sm:grid-cols-2 gap-4">
+            {products.map((item) => {
+              const isSelected = item.id === product.id;
 
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => handleProductChange(item.id)}
-                className={`group relative rounded-xl border px-6 py-6 text-left transition-all duration-300 overflow-hidden ${
-                  isSelected
-                    ? "border-zinc-900 bg-zinc-900 text-white shadow-md"
-                    : "border-zinc-200 bg-zinc-50 text-zinc-900 hover:border-zinc-300 hover:bg-white"
-                }`}
-              >
-                {isSelected && (
-                  <motion.div 
-                    layoutId="active-product-bg"
-                    className="absolute inset-0 bg-zinc-900"
-                    initial={false}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <div className="relative z-10">
-                  <p className="text-base font-semibold tracking-tight">{item.name}</p>
-                  <p className={`mt-2 text-xs leading-relaxed ${isSelected ? "text-zinc-300" : "text-zinc-500"}`}>
-                    {item.description}
-                  </p>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => handleProductChange(item.id)}
+                  className={`group relative text-left transition-all duration-300 overflow-hidden flex flex-col rounded-[16px] border ${
+                    isSelected
+                      ? "border-[#C49A62] bg-[#0B0B0B] text-white"
+                      : "border-[#E7E7E7] bg-white text-[#0B0B0B] hover:border-[#0B0B0B]/30"
+                  }`}
+                >
+                  <div className="relative w-full aspect-[4/3] bg-[#E9E0D4] overflow-hidden">
+                    <Image
+                      src={productImages[item.id] || "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=400"}
+                      alt={item.name}
+                      fill
+                      className={`object-cover transition-transform duration-700 ${isSelected ? 'scale-105' : 'group-hover:scale-105'}`}
+                      unoptimized
+                    />
+                    {isSelected && (
+                      <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-[#C49A62] text-white flex items-center justify-center shadow-md">
+                        <CheckCircle2 className="w-4 h-4" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5 relative z-10 flex-1 flex flex-col justify-center">
+                    <p className="text-sm font-bold tracking-tight uppercase mb-1">{item.name}</p>
+                    <p className={`text-xs leading-relaxed ${isSelected ? "text-white/70" : "text-[#71717A]"}`}>
+                      {item.description}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </section>
 
-        <div className="grid lg:grid-cols-[1fr_320px] gap-8">
-          {/* Preview Panel */}
-          <div className="bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm relative flex flex-col h-[600px] lg:h-auto">
-            <div className="p-6 border-b border-zinc-200 bg-white relative z-10 flex justify-between items-center">
-              <div>
-                <p className="text-sm font-medium text-zinc-500 mb-1">Live Preview</p>
-                <h3 className="text-lg font-semibold text-zinc-950">{product.name}</h3>
-              </div>
-              {logoPreview && (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium border border-green-200">
-                  <CheckCircle2 className="w-3.5 h-3.5" /> Render Active
-                </span>
-              )}
+        {/* Logo Upload */}
+        <section>
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight mb-2">Upload your logo</h2>
+            <p className="text-[#71717A] text-sm">PNG, SVG, PDF or AI. Maximum file size: 10MB</p>
+          </div>
+          <label className="relative flex flex-col items-center justify-center rounded-[16px] border-2 border-dashed border-[#E7E7E7] bg-white p-10 cursor-pointer hover:bg-[#F7F5F1] hover:border-[#0B0B0B]/20 transition-all group">
+            <div className="w-14 h-14 rounded-full bg-[#F7F5F1] flex items-center justify-center mb-4 text-[#0B0B0B] group-hover:text-[#C49A62] group-hover:bg-[#C49A62]/10 transition-colors">
+              <UploadCloud className="w-6 h-6" />
             </div>
-            <PackagingPreview kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
-
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-zinc-200 bg-white px-6 py-4">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-zinc-100 flex items-center justify-center">
-                  <UploadCloud className="w-5 h-5 text-zinc-600" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-zinc-950">Upload logo</p>
-                  <p className="text-xs text-zinc-500">PNG, JPG, or SVG</p>
-                </div>
-              </div>
-              <label className="relative inline-flex cursor-pointer items-center justify-center rounded-md bg-white border border-zinc-200 shadow-sm px-6 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-50 transition-colors">
-                <span>Choose file</span>
-                <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
-              </label>
-            </div>
-
+            <span className="text-sm font-bold text-[#0B0B0B] mb-1">Choose file</span>
+            <span className="text-xs text-[#71717A]">or drag and drop</span>
+            <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
             {logoName && (
-              <p className="text-xs text-zinc-500 px-6 pb-4 bg-white flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-green-600" /> {logoName}
-              </p>
+              <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-[16px] flex flex-col items-center justify-center p-6 border border-[#C49A62]">
+                <CheckCircle2 className="w-8 h-8 text-[#C49A62] mb-3" />
+                <p className="text-sm font-bold text-[#0B0B0B] truncate max-w-full px-4">{logoName}</p>
+                <p className="text-xs text-[#71717A] mt-2 underline">Click to replace</p>
+              </div>
             )}
-          </div>
+          </label>
+        </section>
 
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 flex flex-col shadow-sm">
-            <div className="mb-8">
-              <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Spec Sheet</p>
-              <h3 className="text-xl font-semibold text-zinc-950 mb-2">{product.name}</h3>
-              <p className="text-sm text-zinc-600 leading-relaxed">{product.description}</p>
+        {/* Live Preview */}
+        <section>
+          <div className="mb-6">
+            <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight mb-2">Live Preview</h2>
+          </div>
+          <div className="rounded-[16px] bg-[#F7F5F1] border border-[#E7E7E7] p-8 overflow-hidden relative flex flex-col items-center justify-center min-h-[500px]">
+            <PackagingPreview kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
+            
+            {/* Preview Controls */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full border border-[#E7E7E7] shadow-sm">
+               <label className="flex items-center gap-2 text-xs font-bold text-[#0B0B0B] hover:text-[#C49A62] cursor-pointer transition-colors">
+                  <UploadCloud className="w-4 h-4" /> UPLOAD LOGO
+                  <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
+               </label>
+               <div className="w-px h-4 bg-[#E7E7E7]" />
+               <button className="flex items-center gap-2 text-xs font-bold text-[#0B0B0B] hover:text-[#C49A62] transition-colors">
+                  <Type className="w-4 h-4" /> ADD TEXT
+               </button>
+               <div className="w-px h-4 bg-[#E7E7E7]" />
+               <button className="flex items-center gap-2 text-xs font-bold text-[#0B0B0B] hover:text-[#C49A62] transition-colors">
+                  <Palette className="w-4 h-4" /> CHOOSE COLOURS
+               </button>
             </div>
-
-            <dl className="grid gap-4 text-sm mt-auto">
-              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
-                <dt className="text-zinc-500">Lead time</dt>
-                <dd className="font-medium text-zinc-900">{product.leadTime}</dd>
-              </div>
-              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
-                <dt className="text-zinc-500">Minimum order</dt>
-                <dd className="font-medium text-zinc-900">{product.minOrder} units</dd>
-              </div>
-              <div className="flex items-center justify-between">
-                <dt className="text-zinc-500">Finish</dt>
-                <dd className="font-medium text-zinc-900">{product.finish}</dd>
-              </div>
-            </dl>
           </div>
-        </div>
+        </section>
+
+        {/* Spec Sheet */}
+        <section className="bg-white rounded-[16px] border border-[#E7E7E7] p-8 lg:p-10">
+          <div className="mb-8 border-b border-[#E7E7E7] pb-8">
+            <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">SPEC SHEET</p>
+            <h3 className="text-2xl font-bold text-[#0B0B0B] mb-3">{product.name}</h3>
+            <p className="text-base text-[#71717A] leading-relaxed max-w-2xl">{product.description}</p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-x-12 gap-y-6 text-sm">
+            <div>
+              <span className="text-[#71717A] block mb-1">Lead time</span>
+              <span className="font-semibold text-[#0B0B0B]">{product.leadTime}</span>
+            </div>
+            <div>
+              <span className="text-[#71717A] block mb-1">Minimum order</span>
+              <span className="font-semibold text-[#0B0B0B]">{product.minOrder} units</span>
+            </div>
+            <div>
+              <span className="text-[#71717A] block mb-1">Finish</span>
+              <span className="font-semibold text-[#0B0B0B]">{product.finish}</span>
+            </div>
+            <div>
+              <span className="text-[#71717A] block mb-1">Material</span>
+              <span className="font-semibold text-[#0B0B0B]">Premium food-grade board</span>
+            </div>
+            <div>
+              <span className="text-[#71717A] block mb-1">Sizes</span>
+              <span className="font-semibold text-[#0B0B0B]">Standard commercial sizing</span>
+            </div>
+            <div>
+              <span className="text-[#71717A] block mb-1">Printing</span>
+              <span className="font-semibold text-[#0B0B0B]">Full colour / Pantone</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Custom Project */}
+        <section className="bg-[#E9E0D4] rounded-[16px] p-8 lg:p-10 flex flex-col sm:flex-row items-center justify-between gap-8 border border-[#E7E7E7]">
+          <div>
+            <h3 className="text-xl font-bold text-[#0B0B0B] mb-2 tracking-tight">Need something custom?</h3>
+            <p className="text-sm text-[#0B0B0B]/70 max-w-md leading-relaxed">Tell us what you need and our team will help create the perfect packaging solution.</p>
+          </div>
+          <button className="whitespace-nowrap inline-flex h-12 items-center justify-center bg-[#0B0B0B] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#151515] group">
+            Start custom project <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </section>
+
       </div>
 
-      <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-8 lg:p-12 shadow-sm flex flex-col">
-        <div className="mb-10">
-          <p className="text-sm font-medium text-zinc-500 mb-2">Step 2: Quote & Order</p>
-          <h2 className="text-3xl font-bold text-zinc-950">Production details</h2>
+      {/* RIGHT PANEL: Quote & Order (Sticky) */}
+      <div className="lg:sticky lg:top-32 flex flex-col gap-8 bg-white rounded-[16px] border border-[#E7E7E7] p-8 lg:p-10 shadow-sm">
+        
+        <div>
+          <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">02 / QUOTE & ORDER</p>
+          <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">Production details</h2>
         </div>
 
-        <div className="space-y-8 flex-1">
+        {/* Logo Placement */}
+        <div>
+          <p className="text-xs font-bold text-[#0B0B0B] mb-3 uppercase tracking-widest">Logo placement</p>
+          <div className="grid gap-3">
+            {placementOptions.map((option) => {
+              const isSelected = option.value === placement;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  onClick={() => setPlacement(option.value)}
+                  className={`relative rounded-[10px] border px-4 py-3 flex items-center justify-between transition-all duration-300 ${
+                    isSelected
+                      ? "border-[#0B0B0B] bg-[#0B0B0B] text-white"
+                      : "border-[#E7E7E7] bg-white text-[#0B0B0B] hover:border-[#0B0B0B]/30"
+                  }`}
+                >
+                  <span className="text-sm font-semibold relative z-10">{option.label}</span>
+                  <span className={`text-xs font-medium relative z-10 ${isSelected ? "text-[#C49A62]" : "text-[#71717A]"}`}>
+                    {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Quantity */}
+        <div>
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-xs font-bold text-[#0B0B0B] uppercase tracking-widest">Quantity</p>
+            <p className="text-xs font-semibold text-[#71717A]">MOQ: {product.minOrder}</p>
+          </div>
+          <input
+            type="number"
+            min={product.minOrder}
+            step={50}
+            value={quantity}
+            onChange={(event) => setQuantity(Math.max(product.minOrder, Number(event.target.value) || product.minOrder))}
+            className="w-full rounded-[10px] border border-[#E7E7E7] bg-white px-4 py-3 text-[#0B0B0B] text-lg font-semibold outline-none transition focus:border-[#0B0B0B] focus:ring-1 focus:ring-[#0B0B0B]"
+          />
+          {quantity < product.minOrder && (
+             <p className="text-xs text-red-500 mt-2 font-medium">Minimum order: {product.minOrder} units.</p>
+          )}
+        </div>
+
+        {/* Custom Design Service */}
+        <label className="flex items-start gap-4 rounded-[10px] border border-[#E7E7E7] bg-[#F7F5F1] p-5 cursor-pointer hover:border-[#C49A62] transition-colors group">
+          <div className="pt-0.5">
+            <input
+              type="checkbox"
+              checked={customDesign}
+              onChange={(event) => setCustomDesign(event.target.checked)}
+              className="h-4 w-4 rounded border-[#E7E7E7] text-[#C49A62] focus:ring-[#C49A62]"
+            />
+          </div>
           <div>
-            <p className="text-sm font-semibold text-zinc-900 mb-3">Logo placement</p>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {placementOptions.map((option) => {
-                const isSelected = option.value === placement;
-
-                return (
-                  <button
-                    key={option.value}
-                    type="button"
-                    onClick={() => setPlacement(option.value)}
-                    className={`relative rounded-xl border px-4 py-3 text-center transition-all duration-300 ${
-                      isSelected
-                        ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
-                        : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300"
-                    }`}
-                  >
-                    {isSelected && (
-                      <motion.div 
-                        layoutId="active-placement-bg"
-                        className="absolute inset-0 bg-zinc-900 rounded-xl"
-                        initial={false}
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                      />
-                    )}
-                    <div className="relative z-10">
-                      <p className="text-sm font-medium">{option.label}</p>
-                      <p className={`mt-1 text-xs ${isSelected ? "text-zinc-300" : "text-zinc-500"}`}>
-                        {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+             <span className="text-sm font-bold text-[#0B0B0B] block mb-1">Custom Design (+{currency.format(customDesignFee)})</span>
+             <span className="text-xs text-[#71717A] leading-relaxed">
+               We turn your uploaded logo into a fully branded packaging concept before production.
+             </span>
           </div>
+        </label>
 
-          <div className="grid gap-6 sm:grid-cols-[1fr_auto] items-end">
-            <label className="block">
-              <span className="text-sm font-semibold text-zinc-900 mb-3 block">Quantity</span>
-              <input
-                type="number"
-                min={product.minOrder}
-                step={50}
-                value={quantity}
-                onChange={(event) => setQuantity(Math.max(product.minOrder, Number(event.target.value) || product.minOrder))}
-                className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-base shadow-sm outline-none transition focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
-              />
-            </label>
-            <div className="rounded-xl border border-zinc-200 bg-white px-4 py-3 flex items-center h-[50px] shadow-sm">
-              <p className="text-xs font-medium text-zinc-500">
-                MOQ: {product.minOrder}
-              </p>
+        {/* Price Calculator */}
+        <div className="bg-[#0B0B0B] text-white rounded-[16px] p-6 lg:p-8 mt-2">
+          <p className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] mb-6">Approximate Quote</p>
+          <div className="space-y-4 text-sm text-white/80">
+            <div className="flex items-center justify-between">
+              <span>Base price per 100</span>
+              <span className="font-medium text-white">{currency.format(product.basePrice)}</span>
             </div>
+            <div className="flex items-center justify-between">
+              <span>Placement uplift</span>
+              <span className="font-medium text-white">{placementMeta.fee === 0 ? "Included" : currency.format(placementMeta.fee)}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Production subtotal</span>
+              <span className="font-medium text-white">{currency.format(quote.subtotal)}</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Custom design</span>
+              <span className="font-medium text-white">{customDesign ? currency.format(customDesignFee) : "Not added"}</span>
+            </div>
+            <div className="flex items-center justify-between border-t border-white/20 pt-6 mt-6 text-2xl font-bold text-white">
+              <span>Total Estimate</span>
+              <span className="text-[#C49A62]">{currency.format(quote.total)}</span>
+            </div>
+            <p className="text-[10px] text-white/40 mt-4 leading-relaxed">
+               Final pricing may vary based on artwork, materials and production requirements.
+            </p>
           </div>
+        </div>
 
-          <label className="flex items-start gap-4 rounded-xl border border-zinc-200 bg-white p-5 cursor-pointer hover:bg-zinc-50 transition-colors shadow-sm">
-            <div className="pt-0.5">
-              <input
-                type="checkbox"
-                checked={customDesign}
-                onChange={(event) => setCustomDesign(event.target.checked)}
-                className="h-4 w-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
-              />
-            </div>
-            <span className="text-sm text-zinc-600">
-              Add a one-off custom design service for <strong className="text-zinc-900 font-semibold">{currency.format(customDesignFee)}</strong>.
-              We turn the uploaded logo into a fully branded pack concept before production.
-            </span>
-          </label>
-
-          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-            <p className="text-sm font-semibold text-zinc-900 mb-4">Approximate quote</p>
-            <div className="space-y-3 text-sm text-zinc-600">
-              <div className="flex items-center justify-between">
-                <span>Base rate per 100</span>
-                <span className="font-medium text-zinc-900">{currency.format(product.basePrice)}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Placement uplift</span>
-                <span className="font-medium text-zinc-900">{placementMeta.fee === 0 ? "Included" : currency.format(placementMeta.fee)}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Production subtotal</span>
-                <span className="font-medium text-zinc-900">{currency.format(quote.subtotal)}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Custom design</span>
-                <span className="font-medium text-zinc-900">{customDesign ? currency.format(customDesignFee) : "Not added"}</span>
-              </div>
-              <div className="flex items-center justify-between border-t border-zinc-100 pt-4 mt-4 text-lg font-bold text-zinc-950">
-                <span>Total estimate</span>
-                <span>{currency.format(quote.total)}</span>
-              </div>
-            </div>
+        {/* Shipping Details */}
+        <div className="space-y-5 pt-6 border-t border-[#E7E7E7]">
+          <p className="text-xs font-bold text-[#0B0B0B] uppercase tracking-widest">Shipping Details</p>
+          <div className="grid gap-4">
+            <FormInput
+              label="Your name"
+              value={orderForm.buyerName}
+              onChange={(value) => handleInputChange("buyerName", value)}
+              placeholder="e.g. Emma Shaw"
+            />
+            <FormInput
+              label="Company name"
+              value={orderForm.company}
+              onChange={(value) => handleInputChange("company", value)}
+              placeholder="e.g. Harbour Catering"
+            />
+            <FormInput
+              label="Email address"
+              type="email"
+              value={orderForm.email}
+              onChange={(value) => handleInputChange("email", value)}
+              placeholder="you@company.com"
+            />
+            <FormTextArea
+              label="Delivery address"
+              value={orderForm.shippingAddress}
+              onChange={(value) => handleInputChange("shippingAddress", value)}
+              placeholder="Full shipping address..."
+            />
+            <FormTextArea
+              label="Order notes"
+              value={orderForm.notes}
+              onChange={(value) => handleInputChange("notes", value)}
+              placeholder="Event date, print colour, or any extra packaging notes"
+            />
           </div>
+        </div>
 
-          <div className="space-y-4 pt-4 border-t border-zinc-200">
-            <p className="text-sm font-semibold text-zinc-900">Shipping Details</p>
-            <div className="grid gap-4">
-              <FormInput
-                label="Buyer name"
-                value={orderForm.buyerName}
-                onChange={(value) => handleInputChange("buyerName", value)}
-                placeholder="Emma Shaw"
-              />
-              <FormInput
-                label="Company"
-                value={orderForm.company}
-                onChange={(value) => handleInputChange("company", value)}
-                placeholder="Harbour Catering"
-              />
-              <FormInput
-                label="Email"
-                type="email"
-                value={orderForm.email}
-                onChange={(value) => handleInputChange("email", value)}
-                placeholder="procurement@company.com"
-              />
-              <FormTextArea
-                label="Shipping name and address"
-                value={orderForm.shippingAddress}
-                onChange={(value) => handleInputChange("shippingAddress", value)}
-                placeholder="Emma Shaw, 22 Seaforth Way, Liverpool, L3 8RF"
-              />
-              <FormTextArea
-                label="Order notes"
-                value={orderForm.notes}
-                onChange={(value) => handleInputChange("notes", value)}
-                placeholder="Event date, print colour, or any extra pack notes"
-              />
-            </div>
-          </div>
-
+        {/* Primary Action */}
+        <div className="mt-2">
           <button
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full inline-flex h-12 items-center justify-center rounded-md bg-zinc-900 px-6 font-medium text-white shadow transition-colors hover:bg-zinc-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 mt-4"
+            className="w-full inline-flex h-14 items-center justify-center rounded-[8px] bg-[#0B0B0B] px-6 font-semibold text-white transition-all hover:bg-[#151515] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0B0B0B] disabled:cursor-not-allowed disabled:opacity-50 group"
           >
-            {isSubmitting ? "Processing..." : "Submit to Production Queue"}
+            {isSubmitting ? "Processing..." : (
+               <>Request Production Quote <ArrowRight className="ml-2 w-4 h-4 text-[#C49A62] group-hover:translate-x-1 transition-transform" /></>
+            )}
           </button>
+          <p className="text-[11px] text-[#71717A] text-center mt-4 flex items-center justify-center gap-1.5 font-medium">
+             <Lock className="w-3 h-3" /> Your details are secure and will only be used for this quote.
+          </p>
 
           <AnimatePresence>
             {submitMessage && (
-              <motion.p 
+              <motion.div 
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
-                className="text-sm font-medium text-center text-zinc-700 bg-white py-3 rounded-lg border border-zinc-200 mt-4 shadow-sm"
+                className="text-sm font-medium text-center text-[#0B0B0B] bg-[#F7F5F1] py-4 px-6 rounded-[8px] border border-[#C49A62] mt-6"
               >
                 {submitMessage}
-              </motion.p>
+              </motion.div>
             )}
           </AnimatePresence>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -465,18 +518,18 @@ function PackagingPreview({
   logoPreview: string | null;
 }) {
   return (
-    <div className="relative flex min-h-[420px] flex-1 items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_#fff_0%,_#f5f0e9_48%,_#ece5db_100%)]">
-      <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-zinc-900/10 blur-2xl" />
+    <div className="relative flex w-full h-full items-center justify-center">
+      <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-[#0B0B0B]/5 blur-2xl" />
       
-      <div className="relative flex items-center justify-center">
+      <div className="relative flex items-center justify-center scale-110 sm:scale-125 lg:scale-100">
         <PackagingShell kind={kind} accent={accent} />
         <div
-          className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/75 px-2 text-center shadow-sm transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
+          className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/80 px-2 text-center shadow-sm transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
         >
           {logoPreview ? (
             <Image src={logoPreview} alt="Uploaded logo preview" fill unoptimized className="object-contain p-1" />
           ) : (
-            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-700">Your Logo</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0B0B0B]/40">Your Logo</span>
           )}
         </div>
       </div>
@@ -488,12 +541,12 @@ function PackagingShell({ kind, accent }: { kind: ProductKind; accent: string })
   if (kind === "cup") {
     return (
       <svg viewBox="0 0 360 420" className="relative z-10 h-[360px] w-[300px]">
-        <ellipse cx="180" cy="372" rx="88" ry="18" fill="#00000010" />
+        <ellipse cx="180" cy="372" rx="88" ry="18" fill="#00000008" />
         <ellipse cx="180" cy="96" rx="102" ry="26" fill="#e4d4c1" />
         <path d="M96 96h168l-28 248c-3 25-25 44-50 44h-12c-25 0-47-19-50-44L96 96Z" fill="#f8f5ef" />
         <path d="M96 96h168l-8 68H104l-8-68Z" fill={accent} opacity="0.2" />
         <ellipse cx="180" cy="96" rx="102" ry="24" fill="#f1e4d5" />
-        <ellipse cx="180" cy="84" rx="110" ry="28" fill="#1d1a17" />
+        <ellipse cx="180" cy="84" rx="110" ry="28" fill="#151515" />
         <ellipse cx="180" cy="84" rx="96" ry="19" fill="#2b2621" />
       </svg>
     );
@@ -502,12 +555,12 @@ function PackagingShell({ kind, accent }: { kind: ProductKind; accent: string })
   if (kind === "bowl") {
     return (
       <svg viewBox="0 0 420 340" className="relative z-10 h-[300px] w-[340px]">
-        <ellipse cx="210" cy="286" rx="118" ry="20" fill="#00000010" />
+        <ellipse cx="210" cy="286" rx="118" ry="20" fill="#00000008" />
         <ellipse cx="210" cy="118" rx="150" ry="36" fill="#efe4d8" />
         <path d="M78 118h264c-6 92-51 145-132 145S84 210 78 118Z" fill="#faf6f0" />
         <path d="M78 118h264c-2 22-6 40-11 54H89c-5-14-9-32-11-54Z" fill={accent} opacity="0.2" />
         <ellipse cx="210" cy="104" rx="160" ry="34" fill="#e0d1c0" />
-        <ellipse cx="210" cy="94" rx="170" ry="38" fill="#2b2621" />
+        <ellipse cx="210" cy="94" rx="170" ry="38" fill="#151515" />
       </svg>
     );
   }
@@ -515,7 +568,7 @@ function PackagingShell({ kind, accent }: { kind: ProductKind; accent: string })
   if (kind === "box") {
     return (
       <svg viewBox="0 0 420 340" className="relative z-10 h-[300px] w-[340px]">
-        <ellipse cx="210" cy="286" rx="128" ry="20" fill="#00000010" />
+        <ellipse cx="210" cy="286" rx="128" ry="20" fill="#00000008" />
         <path d="M96 118 210 74l114 44-114 44-114-44Z" fill="#f4ebe2" />
         <path d="M96 118v98l114 52v-106L96 118Z" fill="#efe3d7" />
         <path d="M324 118v98l-114 52v-106l114-44Z" fill="#e6d8c9" />
@@ -527,7 +580,7 @@ function PackagingShell({ kind, accent }: { kind: ProductKind; accent: string })
 
   return (
     <svg viewBox="0 0 360 420" className="relative z-10 h-[360px] w-[300px]">
-      <ellipse cx="180" cy="374" rx="98" ry="20" fill="#00000010" />
+      <ellipse cx="180" cy="374" rx="98" ry="20" fill="#00000008" />
       <path d="M124 84c0-10 8-18 18-18h14c10 0 18 8 18 18v18h12V84c0-10 8-18 18-18h14c10 0 18 8 18 18v18h8c17 0 30 13 30 30v196c0 17-13 30-30 30H102c-17 0-30-13-30-30V132c0-17 13-30 30-30h22V84Z" fill="#faf6f0" />
       <path d="M72 132c0-17 13-30 30-30h156c17 0 30 13 30 30v44H72v-44Z" fill={accent} opacity="0.2" />
       <path d="M124 84c0-10 8-18 18-18h14c10 0 18 8 18 18v24h-18V88c0-2-2-4-4-4h-10c-2 0-4 2-4 4v20h-14V84Zm80 0c0-10 8-18 18-18h14c10 0 18 8 18 18v24h-14V88c0-2-2-4-4-4h-10c-2 0-4 2-4 4v20h-18V84Z" fill="#b6977f" />
@@ -550,13 +603,13 @@ function FormInput({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold text-zinc-700 mb-2 block">{label}</span>
+      <span className="text-xs font-semibold text-[#0B0B0B] mb-2 block">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none transition focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 placeholder:text-zinc-400"
+        className="w-full rounded-[8px] border border-[#E7E7E7] bg-[#F7F5F1] px-4 py-3 text-sm text-[#0B0B0B] outline-none transition focus:border-[#0B0B0B] focus:ring-1 focus:ring-[#0B0B0B] placeholder:text-[#71717A]"
       />
     </label>
   );
@@ -575,13 +628,13 @@ function FormTextArea({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold text-zinc-700 mb-2 block">{label}</span>
+      <span className="text-xs font-semibold text-[#0B0B0B] mb-2 block">{label}</span>
       <textarea
-        rows={4}
+        rows={3}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none transition focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 placeholder:text-zinc-400 resize-none"
+        className="w-full rounded-[8px] border border-[#E7E7E7] bg-[#F7F5F1] px-4 py-3 text-sm text-[#0B0B0B] outline-none transition focus:border-[#0B0B0B] focus:ring-1 focus:ring-[#0B0B0B] placeholder:text-[#71717A] resize-none"
       />
     </label>
   );
