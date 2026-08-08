@@ -2,6 +2,7 @@ import { VendorDashboard } from "@/components/vendor-dashboard";
 import { createSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 
 export const revalidate = 0; // Disable caching for the dashboard
+export const runtime = 'edge';
 
 export default async function VendorPage() {
   let orders: any[] = [];

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { sendOrderNotifications } from "@/lib/resend";
 import { createSupabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
 
+export const runtime = 'edge';
+
 type OrderRequest = {
   productId?: string;
   productName?: string;
