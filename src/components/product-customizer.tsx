@@ -169,23 +169,22 @@ export function ProductCustomizer() {
 
   return (
     <section id="customizer" className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-      <div className="rounded-[2rem] border border-stone-200 bg-white p-4 shadow-[0_28px_80px_rgba(19,17,14,0.08)] sm:p-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
+      <div className="rounded-[2rem] border border-zinc-200 bg-white p-6 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-500">
-              Live Packaging Preview
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-3">
+              Live Preview
             </p>
-            <h2 className="mt-2 text-2xl font-semibold text-stone-950">
-              Upload a logo and place it directly on the pack
+            <h2 className="text-3xl font-semibold text-zinc-950 tracking-tight">
+              Select product & upload
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-6 text-stone-600">
-            Buyers upload artwork from their device, choose logo placement, and instantly see the branded
-            pack before they request production.
+          <p className="max-w-xs text-sm leading-relaxed text-zinc-500">
+            Upload your artwork to instantly verify placement and scale before requesting production.
           </p>
         </div>
 
-        <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4 mb-8">
           {products.map((item) => {
             const isSelected = item.id === product.id;
 
@@ -194,14 +193,14 @@ export function ProductCustomizer() {
                 key={item.id}
                 type="button"
                 onClick={() => handleProductChange(item.id)}
-                className={`rounded-3xl border px-4 py-4 text-left transition ${
+                className={`group rounded-2xl border px-5 py-5 text-left transition-all duration-300 ${
                   isSelected
-                    ? "border-stone-950 bg-stone-950 text-white"
-                    : "border-stone-200 bg-stone-50 text-stone-700 hover:border-stone-400"
+                    ? "border-zinc-950 bg-zinc-950 text-white shadow-md"
+                    : "border-zinc-200 bg-zinc-50/50 text-zinc-700 hover:border-zinc-300 hover:bg-white"
                 }`}
               >
-                <p className="text-sm font-semibold">{item.name}</p>
-                <p className={`mt-2 text-xs leading-5 ${isSelected ? "text-stone-300" : "text-stone-500"}`}>
+                <p className="text-sm font-semibold tracking-tight">{item.name}</p>
+                <p className={`mt-1.5 text-xs leading-relaxed ${isSelected ? "text-zinc-400" : "text-zinc-500 group-hover:text-zinc-600"}`}>
                   {item.description}
                 </p>
               </button>
@@ -209,57 +208,61 @@ export function ProductCustomizer() {
           })}
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_0.52fr]">
-          <div className="rounded-[1.75rem] bg-stone-100 p-4 sm:p-6">
+        <div className="grid gap-6 lg:grid-cols-[1fr_0.45fr]">
+          <div className="flex flex-col gap-4">
             <PackagingPreview kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
 
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-3xl border border-stone-200 bg-white px-4 py-4">
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-zinc-200 bg-zinc-50/50 px-6 py-5">
               <div>
-                <p className="text-sm font-semibold text-stone-900">Upload your logo</p>
-                <p className="mt-1 text-sm text-stone-500">PNG, JPG, or SVG from your device.</p>
+                <p className="text-sm font-semibold text-zinc-900 tracking-tight">Upload your logo</p>
+                <p className="mt-1 text-xs text-zinc-500">PNG, JPG, or SVG from your device.</p>
               </div>
-              <label className="inline-flex cursor-pointer items-center justify-center rounded-full bg-stone-950 px-5 py-3 text-sm font-semibold text-white">
+              <label className="inline-flex cursor-pointer items-center justify-center rounded-full bg-white border border-zinc-200 shadow-sm px-6 py-2.5 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50 active:scale-[0.98]">
                 Choose file
                 <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
               </label>
             </div>
 
-            <p className="mt-3 text-sm text-stone-500">
-              {logoName ? `Current upload: ${logoName}` : "No artwork uploaded yet. A text placeholder is shown until you add a logo."}
+            <p className="text-xs text-zinc-400 px-2">
+              {logoName ? `Current file: ${logoName}` : "No artwork uploaded yet. A text placeholder is shown until you add a logo."}
             </p>
           </div>
 
-          <div className="rounded-[1.75rem] border border-stone-200 bg-stone-50 p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-stone-500">Product Spec</p>
-            <h3 className="mt-2 text-xl font-semibold text-stone-950">{product.name}</h3>
-            <p className="mt-2 text-sm leading-6 text-stone-600">{product.description}</p>
+          <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 flex flex-col justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-3">Spec Sheet</p>
+              <h3 className="text-xl font-semibold text-zinc-950 tracking-tight mb-2">{product.name}</h3>
+              <p className="text-sm leading-relaxed text-zinc-600 mb-8">{product.description}</p>
+            </div>
 
-            <dl className="mt-5 grid gap-4 text-sm">
-              <div className="flex items-center justify-between border-b border-stone-200 pb-3">
-                <dt className="text-stone-500">Lead time</dt>
-                <dd className="font-medium text-stone-950">{product.leadTime}</dd>
+            <dl className="grid gap-5 text-sm">
+              <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
+                <dt className="text-zinc-500">Lead time</dt>
+                <dd className="font-medium text-zinc-950">{product.leadTime}</dd>
               </div>
-              <div className="flex items-center justify-between border-b border-stone-200 pb-3">
-                <dt className="text-stone-500">Minimum order</dt>
-                <dd className="font-medium text-stone-950">{product.minOrder} units</dd>
+              <div className="flex items-center justify-between border-b border-zinc-200 pb-3">
+                <dt className="text-zinc-500">Minimum order</dt>
+                <dd className="font-medium text-zinc-950">{product.minOrder} units</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-stone-500">Finish</dt>
-                <dd className="font-medium text-stone-950">{product.finish}</dd>
+                <dt className="text-zinc-500">Finish</dt>
+                <dd className="font-medium text-zinc-950">{product.finish}</dd>
               </div>
             </dl>
           </div>
         </div>
       </div>
 
-      <div className="rounded-[2rem] border border-stone-200 bg-[#151311] p-6 text-white shadow-[0_28px_80px_rgba(19,17,14,0.2)]">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-400">Quote Builder</p>
-        <h2 className="mt-2 text-2xl font-semibold">Turn the preview into a vendor-ready order</h2>
+      <div className="rounded-[2rem] bg-zinc-950 p-6 lg:p-10 text-white shadow-2xl flex flex-col">
+        <div className="mb-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 mb-3">Quote & Order</p>
+          <h2 className="text-2xl font-semibold tracking-tight">Turn the preview into production</h2>
+        </div>
 
-        <div className="mt-6 space-y-6">
+        <div className="space-y-8 flex-1">
           <div>
-            <p className="text-sm font-medium text-stone-300">Logo placement</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+            <p className="text-sm font-medium text-zinc-300 mb-3">Logo placement</p>
+            <div className="grid gap-3 sm:grid-cols-3">
               {placementOptions.map((option) => {
                 const isSelected = option.value === placement;
 
@@ -268,14 +271,14 @@ export function ProductCustomizer() {
                     key={option.value}
                     type="button"
                     onClick={() => setPlacement(option.value)}
-                    className={`rounded-2xl border px-4 py-4 text-left transition ${
+                    className={`rounded-xl border px-4 py-3 text-center transition-all duration-200 ${
                       isSelected
-                        ? "border-white bg-white text-stone-950"
-                        : "border-stone-700 bg-stone-900 text-stone-200 hover:border-stone-500"
+                        ? "border-white bg-white text-zinc-950"
+                        : "border-zinc-800 bg-zinc-900/50 text-zinc-300 hover:border-zinc-600 hover:bg-zinc-800"
                     }`}
                   >
-                    <p className="text-sm font-semibold">{option.label}</p>
-                    <p className={`mt-1 text-xs ${isSelected ? "text-stone-500" : "text-stone-400"}`}>
+                    <p className="text-sm font-semibold tracking-tight">{option.label}</p>
+                    <p className={`mt-1 text-[11px] ${isSelected ? "text-zinc-500" : "text-zinc-500"}`}>
                       {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
                     </p>
                   </button>
@@ -284,39 +287,41 @@ export function ProductCustomizer() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
+          <div className="grid gap-4 sm:grid-cols-[1fr_auto] items-end">
             <label className="block">
-              <span className="text-sm font-medium text-stone-300">Quantity</span>
+              <span className="text-sm font-medium text-zinc-300">Quantity</span>
               <input
                 type="number"
                 min={product.minOrder}
                 step={50}
                 value={quantity}
                 onChange={(event) => setQuantity(Math.max(product.minOrder, Number(event.target.value) || product.minOrder))}
-                className="mt-2 w-full rounded-2xl border border-stone-700 bg-stone-900 px-4 py-3 text-white outline-none ring-0 transition focus:border-stone-400"
+                className="mt-2 w-full rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-white outline-none transition focus:border-zinc-400 focus:bg-zinc-900"
               />
             </label>
-            <p className="rounded-2xl border border-stone-700 bg-stone-900 px-4 py-3 text-sm text-stone-300">
+            <p className="rounded-xl border border-zinc-800 bg-zinc-900/50 px-4 py-3 text-sm text-zinc-400 font-medium">
               MOQ: {product.minOrder}
             </p>
           </div>
 
-          <label className="flex items-start gap-3 rounded-3xl border border-stone-700 bg-stone-900/80 p-4">
-            <input
-              type="checkbox"
-              checked={customDesign}
-              onChange={(event) => setCustomDesign(event.target.checked)}
-              className="mt-1 h-4 w-4 rounded border-stone-600 bg-stone-950"
-            />
-            <span className="text-sm leading-6 text-stone-300">
-              Add a one-off custom design service for <strong className="text-white">{currency.format(customDesignFee)}</strong>.
-              We turn the uploaded logo into a more complete branded cup or pack concept.
+          <label className="flex items-start gap-4 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-5 cursor-pointer group hover:bg-zinc-900/60 transition">
+            <div className="pt-0.5">
+              <input
+                type="checkbox"
+                checked={customDesign}
+                onChange={(event) => setCustomDesign(event.target.checked)}
+                className="h-4 w-4 rounded border-zinc-700 bg-zinc-950 text-white accent-white focus:ring-white focus:ring-offset-zinc-950"
+              />
+            </div>
+            <span className="text-sm leading-relaxed text-zinc-400">
+              Add a one-off custom design service for <strong className="text-white font-medium">{currency.format(customDesignFee)}</strong>.
+              We turn the uploaded logo into a fully branded pack concept before production.
             </span>
           </label>
 
-          <div className="rounded-[1.5rem] border border-stone-700 bg-stone-900 p-5">
-            <p className="text-sm font-medium text-stone-300">Approximate quote</p>
-            <div className="mt-4 space-y-3 text-sm text-stone-300">
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6">
+            <p className="text-sm font-semibold text-zinc-300 tracking-tight mb-4">Approximate quote</p>
+            <div className="space-y-3 text-sm text-zinc-400">
               <div className="flex items-center justify-between">
                 <span>Base rate per 100</span>
                 <span>{currency.format(product.basePrice)}</span>
@@ -327,68 +332,68 @@ export function ProductCustomizer() {
               </div>
               <div className="flex items-center justify-between">
                 <span>Production subtotal</span>
-                <span>{currency.format(quote.subtotal)}</span>
+                <span className="text-zinc-300">{currency.format(quote.subtotal)}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Custom design</span>
                 <span>{customDesign ? currency.format(customDesignFee) : "Not added"}</span>
               </div>
-              <div className="flex items-center justify-between border-t border-stone-700 pt-3 text-base font-semibold text-white">
+              <div className="flex items-center justify-between border-t border-zinc-800 pt-4 mt-4 text-base font-semibold text-white">
                 <span>Total estimate</span>
                 <span>{currency.format(quote.total)}</span>
               </div>
             </div>
           </div>
 
-          <div className="grid gap-3">
-            <FormInput
-              label="Buyer name"
-              value={orderForm.buyerName}
-              onChange={(value) => handleInputChange("buyerName", value)}
-              placeholder="Emma Shaw"
-            />
-            <FormInput
-              label="Company"
-              value={orderForm.company}
-              onChange={(value) => handleInputChange("company", value)}
-              placeholder="Harbour Catering"
-            />
-            <FormInput
-              label="Email"
-              type="email"
-              value={orderForm.email}
-              onChange={(value) => handleInputChange("email", value)}
-              placeholder="procurement@company.com"
-            />
-            <FormTextArea
-              label="Shipping name and address"
-              value={orderForm.shippingAddress}
-              onChange={(value) => handleInputChange("shippingAddress", value)}
-              placeholder="Emma Shaw, 22 Seaforth Way, Liverpool, L3 8RF"
-            />
-            <FormTextArea
-              label="Order notes"
-              value={orderForm.notes}
-              onChange={(value) => handleInputChange("notes", value)}
-              placeholder="Event date, print colour, or any extra pack notes"
-            />
-          </div>
-
-          <div className="rounded-3xl border border-stone-700 bg-stone-900 px-4 py-4 text-sm leading-6 text-stone-300">
-            Vendors receive the product spec, shipping name, and shipping address. Buyer email stays on the platform
-            for confirmations and chat alerts rather than being exposed on the vendor view.
+          <div className="space-y-4 pt-4">
+            <p className="text-sm font-semibold text-zinc-300 tracking-tight">Shipping Details</p>
+            <div className="grid gap-4">
+              <FormInput
+                label="Buyer name"
+                value={orderForm.buyerName}
+                onChange={(value) => handleInputChange("buyerName", value)}
+                placeholder="Emma Shaw"
+              />
+              <FormInput
+                label="Company"
+                value={orderForm.company}
+                onChange={(value) => handleInputChange("company", value)}
+                placeholder="Harbour Catering"
+              />
+              <FormInput
+                label="Email"
+                type="email"
+                value={orderForm.email}
+                onChange={(value) => handleInputChange("email", value)}
+                placeholder="procurement@company.com"
+              />
+              <FormTextArea
+                label="Shipping name and address"
+                value={orderForm.shippingAddress}
+                onChange={(value) => handleInputChange("shippingAddress", value)}
+                placeholder="Emma Shaw, 22 Seaforth Way, Liverpool, L3 8RF"
+              />
+              <FormTextArea
+                label="Order notes"
+                value={orderForm.notes}
+                onChange={(value) => handleInputChange("notes", value)}
+                placeholder="Event date, print colour, or any extra pack notes"
+              />
+            </div>
           </div>
 
           <button
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full rounded-full bg-white px-5 py-4 text-sm font-semibold text-stone-950 transition hover:bg-stone-200 disabled:cursor-not-allowed disabled:opacity-70"
+            className="w-full rounded-xl bg-white px-5 py-4 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-200 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-50 mt-4"
           >
             {isSubmitting ? "Submitting order..." : "Submit order to vendor queue"}
           </button>
 
-          {submitMessage ? <p className="text-sm leading-6 text-stone-300">{submitMessage}</p> : null}
+          {submitMessage && (
+            <p className="text-sm text-center font-medium text-white bg-zinc-800 py-3 rounded-lg border border-zinc-700">{submitMessage}</p>
+          )}
         </div>
       </div>
     </section>

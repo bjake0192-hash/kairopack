@@ -1,138 +1,134 @@
 import { ProductCustomizer } from "@/components/product-customizer";
-
-const highlights = [
-  "Upload a real logo file and preview it directly on cups, bowls, boxes, and bags.",
-  "Keep vendors hidden on the storefront while routing each order into a vendor-side pending queue.",
-  "Use Supabase Realtime for order chat and Resend for confirmations plus new-message alerts.",
-];
-
-const workflow = [
-  {
-    title: "1. Buyer customises the pack",
-    description:
-      "Customers choose the product, upload their logo, set the logo position, and optionally add a one-off branded design service.",
-  },
-  {
-    title: "2. Order enters the vendor queue",
-    description:
-      "Each order becomes a pending vendor job with the product spec, quantity, branding choices, shipping name, and shipping address.",
-  },
-  {
-    title: "3. Vendor asks follow-up questions",
-    description:
-      "A Supabase Realtime thread gives the vendor a secure way to request artwork clarifications without exposing extra buyer information.",
-  },
-];
-
-const backendNotes = [
-  "Vendor name stays hidden on the product page and customer-facing checkout.",
-  "Vendor-side view only exposes the shipping contact, shipping address, and production brief needed to fulfil the order.",
-  "Buyer and vendor confirmation emails are sent via Resend, with optional chat notification emails for unread messages.",
-];
+import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="bg-[#f6f1eb] text-stone-950">
-      <section className="border-b border-stone-200">
-        <div className="mx-auto flex max-w-7xl flex-col gap-16 px-6 py-8 sm:px-10 lg:px-12">
-          <header className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-stone-500">Kairo Pack</p>
-              <h1 className="mt-3 max-w-3xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
-                Custom catering packaging with instant logo previews
-              </h1>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                href="#customizer"
-                className="rounded-full bg-stone-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-stone-800"
-              >
-                Start customising
-              </a>
-              <a
-                href="/vendor"
-                className="rounded-full border border-stone-300 px-5 py-3 text-sm font-semibold text-stone-700 transition hover:border-stone-950 hover:text-stone-950"
-              >
-                View vendor workspace
-              </a>
-            </div>
-          </header>
-
-          <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <div>
-              <p className="max-w-2xl text-lg leading-8 text-stone-700">
-                This storefront is built around a packaging-first buying journey. Customers can upload their logo from
-                their device, see it positioned on the product, and request branded catering packaging without seeing
-                which vendor will manufacture it.
-              </p>
-
-              <div className="mt-8 grid gap-4">
-                {highlights.map((highlight) => (
-                  <div key={highlight} className="rounded-3xl border border-stone-200 bg-white/70 px-5 py-4">
-                    <p className="text-sm leading-6 text-stone-700">{highlight}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-[2rem] border border-stone-200 bg-stone-950 p-6 text-white shadow-[0_30px_80px_rgba(19,17,14,0.18)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-500">Built for Catering</p>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <Metric value="4" label="Pack types ready for preview" />
-                <Metric value="£50" label="One-off custom branding upsell" />
-                <Metric value="Realtime" label="Vendor chat workflow" />
-                <Metric value="Hidden" label="Vendor identity on storefront" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 py-12 sm:px-10 lg:px-12">
-        <ProductCustomizer />
-      </section>
-
-      <section className="mx-auto grid max-w-7xl gap-8 px-6 pb-12 sm:px-10 lg:grid-cols-[0.95fr_1.05fr] lg:px-12">
-        <div className="rounded-[2rem] border border-stone-200 bg-white p-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-500">Operational Flow</p>
-          <div className="mt-5 space-y-4">
-            {workflow.map((item) => (
-              <article key={item.title} className="rounded-[1.5rem] border border-stone-200 bg-stone-50 p-5">
-                <h2 className="text-lg font-semibold text-stone-950">{item.title}</h2>
-                <p className="mt-2 text-sm leading-6 text-stone-600">{item.description}</p>
-              </article>
-            ))}
+    <main className="flex flex-col min-h-screen bg-white">
+      {/* 50/50 Hero Section */}
+      <section className="grid lg:grid-cols-2 min-h-[90vh] border-b border-zinc-200">
+        {/* Left: Copy & CTA */}
+        <div className="flex flex-col justify-center px-8 py-20 lg:px-16 xl:px-24">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 mb-6">
+            Kairo Pack B2B
+          </p>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tighter text-zinc-950 leading-[1.1] text-balance mb-8">
+            Upload your logo.<br />
+            See it instantly.<br />
+            Ship to your kitchen.
+          </h1>
+          <p className="text-lg text-zinc-600 leading-relaxed max-w-xl mb-12">
+            The professional standard for custom catering packaging. Preview your branding directly on cups, bowls, and boxes before you order. No generic mockups, no hidden vendor friction.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <a
+              href="#customizer"
+              className="inline-flex justify-center items-center h-14 rounded-full bg-zinc-950 px-8 text-sm font-semibold text-white transition hover:bg-zinc-800 active:scale-[0.98]"
+            >
+              Start Customising
+            </a>
+            <a
+              href="/vendor"
+              className="inline-flex justify-center items-center h-14 rounded-full border border-zinc-200 bg-white px-8 text-sm font-semibold text-zinc-900 transition hover:border-zinc-400 hover:bg-zinc-50 active:scale-[0.98]"
+            >
+              Vendor Workspace
+            </a>
           </div>
         </div>
 
-        <div className="rounded-[2rem] border border-stone-200 bg-[#151311] p-6 text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-stone-500">Backend Notes</p>
-          <h2 className="mt-3 text-3xl font-semibold">The commerce flow works differently on purpose</h2>
-          <div className="mt-6 space-y-4">
-            {backendNotes.map((note) => (
-              <div key={note} className="rounded-[1.5rem] border border-stone-800 bg-stone-900 px-5 py-4">
-                <p className="text-sm leading-6 text-stone-300">{note}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 rounded-[1.5rem] border border-stone-800 bg-stone-900 px-5 py-5">
-            <p className="text-sm font-medium text-stone-300">Recommended technical shape</p>
-            <p className="mt-2 text-sm leading-6 text-stone-400">
-              Next.js powers the storefront and vendor workspace, Supabase handles auth, order tables, Storage, and
-              Realtime chat, and Resend delivers transactional email for order events and message notifications.
+        {/* Right: Immersive Image */}
+        <div className="relative hidden lg:block bg-zinc-100 border-l border-zinc-200">
+          <Image
+            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=High-end%20minimal%20catering%20packaging%2C%20matte%20black%20coffee%20cup%20and%20craft%20paper%20bag%20on%20a%20concrete%20counter%2C%20professional%20studio%20lighting%2C%20realistic&image_size=portrait_4_3"
+            alt="High-end minimal catering packaging"
+            fill
+            className="object-cover object-center"
+            priority
+            unoptimized
+          />
+        </div>
+      </section>
+
+      {/* Feature Grid */}
+      <section className="border-b border-zinc-200 bg-zinc-50/50">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200">
+          <FeatureCard 
+            number="01"
+            title="Instant Preview"
+            description="Upload your vector or PNG and see it mapped onto physical product dimensions immediately."
+          />
+          <FeatureCard 
+            number="02"
+            title="Premium Finishes"
+            description="Access exclusive materials. Select from kraft paper, matte black, or unbleached sustainable bases."
+          />
+          <FeatureCard 
+            number="03"
+            title="Blind Routing"
+            description="Orders flow directly to certified manufacturers. The supply chain remains completely invisible to buyers."
+          />
+          <FeatureCard 
+            number="04"
+            title="Realtime Chat"
+            description="Clarify artwork specifications securely. Talk directly with production without exposing contact details."
+          />
+        </div>
+      </section>
+
+      {/* Customizer Section */}
+      <section id="customizer" className="py-24 lg:py-32 px-6 lg:px-12">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="mb-16 text-center max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-950 mb-4">
+              Configure your packaging
+            </h2>
+            <p className="text-zinc-600">
+              Select a product, upload your brand assets, and generate a production-ready brief in seconds.
             </p>
           </div>
+          
+          <ProductCustomizer />
         </div>
       </section>
+
+      {/* Footer / Backend Notes */}
+      <footer className="border-t border-zinc-200 bg-zinc-950 py-20 px-8 lg:px-16 text-zinc-400 text-sm">
+        <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24">
+          <div>
+            <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Kairo Pack Architecture</p>
+            <p className="max-w-md leading-relaxed">
+              This storefront runs on Next.js 16, utilizing React Server Components. Supabase manages the secure vendor routing, Row Level Security (RLS) policies, and Realtime WebSocket connections for the hidden chat. Resend triggers all transactional order and message events.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-8 lg:justify-end">
+            <div>
+              <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Stack</p>
+              <ul className="space-y-3">
+                <li>Next.js App Router</li>
+                <li>Tailwind CSS v4</li>
+                <li>Supabase Auth & DB</li>
+                <li>Resend Email API</li>
+              </ul>
+            </div>
+            <div>
+              <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Workflows</p>
+              <ul className="space-y-3">
+                <li><a href="#customizer" className="hover:text-white transition">Product Customizer</a></li>
+                <li><a href="/vendor" className="hover:text-white transition">Vendor Dashboard</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
 
-function Metric({ value, label }: { value: string; label: string }) {
+function FeatureCard({ number, title, description }: { number: string; title: string; description: string }) {
   return (
-    <div className="rounded-[1.5rem] border border-stone-800 bg-stone-900 px-5 py-5">
-      <p className="text-3xl font-semibold text-white">{value}</p>
-      <p className="mt-2 text-sm leading-6 text-stone-400">{label}</p>
+    <div className="p-8 lg:p-12 hover:bg-white transition-colors duration-300">
+      <p className="text-xs font-mono text-zinc-400 mb-6">{number}</p>
+      <h3 className="text-lg font-semibold text-zinc-950 mb-3 tracking-tight">{title}</h3>
+      <p className="text-sm text-zinc-600 leading-relaxed">{description}</p>
     </div>
   );
 }
