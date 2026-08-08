@@ -13,12 +13,11 @@ export default function Home() {
           <div className="hidden lg:block w-1/2 relative">
             <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/40 to-transparent z-10" />
             <Image
-              src="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=1600"
+              src="/images/hero-packaging.png"
               alt="Premium custom packaging on dark studio surface"
               fill
               className="object-cover object-center opacity-90"
               priority
-              unoptimized
             />
           </div>
         </div>
@@ -66,12 +65,11 @@ export default function Home() {
           {/* Mobile-only image fallback since desktop uses the split background */}
           <div className="lg:hidden relative h-[40vh] w-full rounded-2xl overflow-hidden mt-8">
              <Image
-              src="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=800"
+              src="/images/hero-packaging.png"
               alt="Premium custom packaging on dark studio surface"
               fill
               className="object-cover object-center"
               priority
-              unoptimized
             />
           </div>
         </div>
