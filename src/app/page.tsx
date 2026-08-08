@@ -39,7 +39,7 @@ export default function Home() {
         {/* Right: Immersive Image */}
         <div className="relative hidden lg:block bg-zinc-100 border-l border-zinc-200">
           <Image
-            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=High-end%20minimal%20catering%20packaging%2C%20matte%20black%20coffee%20cup%20and%20craft%20paper%20bag%20on%20a%20concrete%20counter%2C%20professional%20studio%20lighting%2C%20realistic&image_size=portrait_4_3"
+            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Photorealistic%20product%20photography%20of%20premium%20blank%20matte%20black%20coffee%20cups%20and%20kraft%20paper%20bags%20on%20a%20clean%20concrete%20surface%2C%20soft%20natural%20lighting%2C%20high-end%20B2B%20catering%20packaging%2C%208k%20resolution&image_size=portrait_4_3"
             alt="High-end minimal catering packaging"
             fill
             className="object-cover object-center"
@@ -100,37 +100,37 @@ export default function Home() {
               title="Double Wall Coffee Cup"
               category="Hot Drinks"
               description="Premium insulation with a matte finish. Available in 8oz, 12oz, and 16oz sizes."
-              imagePrompt="Minimalist%20matte%20black%20double%20wall%20paper%20coffee%20cup%2C%20clean%20studio%20lighting%2C%20white%20background"
+              imagePrompt="Photorealistic%20matte%20black%20double%20wall%20takeaway%20coffee%20cup%20with%20black%20lid%2C%20blank%20no%20logo%2C%20clean%20white%20studio%20background%2C%20professional%20product%20lighting"
             />
             <CatalogCard 
               title="Kraft Salad Bowl"
               category="Food Containers"
               description="Sustainable unbleached kraft paper with secure PLA lids. Perfect for cold or warm dishes."
-              imagePrompt="Kraft%20paper%20salad%20bowl%20with%20clear%20lid%2C%20minimalist%20presentation%2C%20studio%20lighting%2C%20white%20background"
+              imagePrompt="Photorealistic%20round%20unbleached%20kraft%20paper%20salad%20bowl%20with%20clear%20PET%20lid%2C%20blank%20no%20logo%2C%20clean%20white%20studio%20background%2C%20professional%20product%20lighting"
             />
             <CatalogCard 
               title="Premium Burger Box"
               category="Takeaway"
               description="Vented corrugated board construction prevents sogginess. Secure tab closure."
-              imagePrompt="Premium%20corrugated%20burger%20box%20packaging%2C%20closed%2C%20clean%20modern%20aesthetic%2C%20white%20background"
+              imagePrompt="Photorealistic%20premium%20kraft%20corrugated%20cardboard%20burger%20clamshell%20box%2C%20closed%2C%20blank%20no%20logo%2C%20clean%20white%20studio%20background%2C%20professional%20product%20lighting"
             />
             <CatalogCard 
               title="Twisted Handle Carrier"
               category="Bags"
               description="Heavy-duty 120gsm kraft paper bags with reinforced twisted handles."
-              imagePrompt="Brown%20kraft%20paper%20carrier%20bag%20with%20twisted%20handles%2C%20standing%20upright%2C%20minimalist%20studio%20lighting"
+              imagePrompt="Photorealistic%20premium%20brown%20kraft%20paper%20carrier%20bag%20with%20twisted%20paper%20handles%2C%20standing%20upright%2C%20blank%20no%20logo%2C%20clean%20white%20studio%20background"
             />
             <CatalogCard 
               title="Clear PET Cold Cup"
               category="Cold Drinks"
               description="Crystal clear shatter-resistant cups for iced coffees, smoothies, and juices."
-              imagePrompt="Clear%20plastic%20cold%20cup%20with%20dome%20lid%2C%20empty%2C%20clean%20minimalist%20studio%20photography"
+              imagePrompt="Photorealistic%20clear%20plastic%20PET%20cold%20drink%20cup%20with%20dome%20lid%20and%20straw%20hole%2C%20empty%2C%20clean%20white%20studio%20background%2C%20professional%20product%20lighting"
             />
             <CatalogCard 
               title="Greaseproof Wrap"
               category="Wraps & Liners"
               description="Custom printed food-safe wrapping paper. Ideal for sandwiches, burgers, and basket liners."
-              imagePrompt="Stack%20of%20premium%20greaseproof%20food%20wrapping%20paper%20sheets%2C%20minimal%20clean%20composition%2C%20white%20background"
+              imagePrompt="Photorealistic%20stack%20of%20folded%20premium%20white%20greaseproof%20food%20wrapping%20paper%20sheets%2C%20blank%20no%20logo%2C%20clean%20white%20studio%20background"
             />
           </div>
         </div>
