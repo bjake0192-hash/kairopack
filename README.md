@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Kairo Pack
 
-## Getting Started
+Custom ecommerce starter for branded catering packaging. The storefront lets buyers upload a logo from their device, preview it on packaging, choose logo placement, and submit a vendor-routed order. A vendor workspace shows how pending orders and realtime chat can be handled behind the scenes without exposing vendor details on the product page.
 
-First, run the development server:
+## Features
+
+- Live upload-based packaging preview for cups, bowls, boxes, and bags
+- Quote builder with placement pricing and optional `£50` custom design service
+- Vendor-facing workspace route at `/vendor`
+- API routes for orders and chat messages
+- Supabase-ready schema in [`supabase/migrations/202608081415_initial_schema.sql`](./supabase/migrations/202608081415_initial_schema.sql)
+- Resend notification helpers for buyer/vendor confirmations and chat alerts
+
+## Getting started
+
+Install dependencies and run the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` for the storefront and `http://localhost:3000/vendor` for the vendor workspace.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and fill in:
 
-## Learn More
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL`
+- `DEFAULT_VENDOR_EMAIL`
 
-To learn more about Next.js, take a look at the following resources:
+Without Supabase or Resend configured, the UI still runs in demo mode and the API routes return success responses without persistence.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Orders store full buyer details server-side, but the vendor-facing UX is designed to show only the shipping contact and shipping address.
+- Uploaded logos are previewed client-side in this starter. For production, store the original file in Supabase Storage during checkout.
+- The chat notification endpoint is implemented at `/api/messages` and is intended to be called alongside a Supabase Realtime thread subscription.
 
-## Deploy on Vercel
+## Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js App Router
+- TypeScript
+- Tailwind CSS v4
+- Supabase (`@supabase/supabase-js`, `@supabase/ssr`)
+- Resend
