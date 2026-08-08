@@ -171,20 +171,18 @@ export function ProductCustomizer() {
 
   return (
     <section id="customizer" className="grid gap-12 lg:grid-cols-[1fr_0.85fr]">
-      <div className="rounded-[3rem] border border-[#111111]/10 bg-white p-8 lg:p-12 shadow-2xl relative overflow-hidden">
-        {/* Subtle decorative background */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#f4f3ef] rounded-full blur-3xl opacity-50 pointer-events-none -translate-y-1/2 translate-x-1/3" />
+      <div className="rounded-3xl border border-zinc-200 bg-white p-8 lg:p-12 shadow-sm relative overflow-hidden">
         
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 relative z-10">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-[#111111]/50 mb-4">
+            <p className="text-sm font-medium text-zinc-500 mb-2">
               Step 1: Configuration
             </p>
-            <h2 className="text-4xl font-semibold text-[#111111] tracking-tighter-plus">
+            <h2 className="text-3xl font-bold text-zinc-950">
               Select product & upload
             </h2>
           </div>
-          <p className="max-w-xs text-sm leading-relaxed text-[#111111]/70 font-medium">
+          <p className="max-w-xs text-sm leading-relaxed text-zinc-600">
             Upload your artwork to instantly verify placement and scale before requesting production.
           </p>
         </div>
@@ -198,23 +196,23 @@ export function ProductCustomizer() {
                 key={item.id}
                 type="button"
                 onClick={() => handleProductChange(item.id)}
-                className={`group relative rounded-2xl border px-6 py-6 text-left transition-all duration-500 overflow-hidden ${
+                className={`group relative rounded-xl border px-6 py-6 text-left transition-all duration-300 overflow-hidden ${
                   isSelected
-                    ? "border-[#111111] bg-[#111111] text-white shadow-xl"
-                    : "border-[#111111]/10 bg-[#f4f3ef]/50 text-[#111111] hover:border-[#111111]/30 hover:bg-white"
+                    ? "border-zinc-900 bg-zinc-900 text-white shadow-md"
+                    : "border-zinc-200 bg-zinc-50 text-zinc-900 hover:border-zinc-300 hover:bg-white"
                 }`}
               >
                 {isSelected && (
                   <motion.div 
                     layoutId="active-product-bg"
-                    className="absolute inset-0 bg-[#111111]"
+                    className="absolute inset-0 bg-zinc-900"
                     initial={false}
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
                 <div className="relative z-10">
                   <p className="text-base font-semibold tracking-tight">{item.name}</p>
-                  <p className={`mt-2 text-xs leading-relaxed ${isSelected ? "text-white/70" : "text-[#111111]/60"}`}>
+                  <p className={`mt-2 text-xs leading-relaxed ${isSelected ? "text-zinc-300" : "text-zinc-500"}`}>
                     {item.description}
                   </p>
                 </div>
@@ -223,74 +221,80 @@ export function ProductCustomizer() {
           })}
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.45fr] relative z-10">
-          <div className="flex flex-col gap-6">
+        <div className="grid lg:grid-cols-[1fr_320px] gap-8">
+          {/* Preview Panel */}
+          <div className="bg-zinc-50 rounded-2xl overflow-hidden border border-zinc-200 shadow-sm relative flex flex-col h-[600px] lg:h-auto">
+            <div className="p-6 border-b border-zinc-200 bg-white relative z-10 flex justify-between items-center">
+              <div>
+                <p className="text-sm font-medium text-zinc-500 mb-1">Live Preview</p>
+                <h3 className="text-lg font-semibold text-zinc-950">{product.name}</h3>
+              </div>
+              {logoPreview && (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-green-50 text-green-700 text-xs font-medium border border-green-200">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> Render Active
+                </span>
+              )}
+            </div>
             <PackagingPreview kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
 
-            <div className="flex flex-wrap items-center justify-between gap-6 rounded-3xl border border-[#111111]/10 bg-[#f4f3ef]/80 backdrop-blur-sm px-8 py-6">
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shadow-sm">
-                  <UploadCloud className="w-5 h-5 text-[#111111]" />
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-zinc-200 bg-white px-6 py-4">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-zinc-100 flex items-center justify-center">
+                  <UploadCloud className="w-5 h-5 text-zinc-600" />
                 </div>
                 <div>
-                  <p className="text-base font-semibold text-[#111111] tracking-tight">Upload your logo</p>
-                  <p className="mt-1 text-xs text-[#111111]/60 font-medium">PNG, JPG, or SVG from your device.</p>
+                  <p className="text-sm font-semibold text-zinc-950">Upload logo</p>
+                  <p className="text-xs text-zinc-500">PNG, JPG, or SVG</p>
                 </div>
               </div>
-              <label className="group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-white border border-[#111111]/10 shadow-sm px-8 py-3 text-xs font-bold uppercase tracking-widest text-[#111111] transition hover:shadow-md">
-                <span className="relative z-10 group-hover:text-white transition-colors duration-300">Choose file</span>
-                <div className="absolute inset-0 h-full w-full scale-0 rounded-full bg-[#111111] transition-all duration-300 ease-out group-hover:scale-100" />
+              <label className="relative inline-flex cursor-pointer items-center justify-center rounded-md bg-white border border-zinc-200 shadow-sm px-6 py-2 text-sm font-medium text-zinc-900 hover:bg-zinc-50 transition-colors">
+                <span>Choose file</span>
                 <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
               </label>
             </div>
 
-            <p className="text-[10px] uppercase tracking-widest font-bold text-[#111111]/40 px-4">
-              {logoName ? (
-                <span className="flex items-center gap-2 text-[#d9534f]">
-                  <CheckCircle2 className="w-3 h-3" /> Current file: {logoName}
-                </span>
-              ) : "No artwork uploaded yet. A text placeholder is shown."}
-            </p>
+            {logoName && (
+              <p className="text-xs text-zinc-500 px-6 pb-4 bg-white flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-green-600" /> {logoName}
+              </p>
+            )}
           </div>
 
-          <div className="rounded-3xl border border-[#111111]/10 bg-white p-8 flex flex-col justify-between shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-widest text-[#111111]/50 mb-4">Spec Sheet</p>
-              <h3 className="text-2xl font-semibold text-[#111111] tracking-tighter-plus mb-3">{product.name}</h3>
-              <p className="text-sm leading-relaxed text-[#111111]/70 mb-10 font-medium">{product.description}</p>
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 flex flex-col shadow-sm">
+            <div className="mb-8">
+              <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Spec Sheet</p>
+              <h3 className="text-xl font-semibold text-zinc-950 mb-2">{product.name}</h3>
+              <p className="text-sm text-zinc-600 leading-relaxed">{product.description}</p>
             </div>
 
-            <dl className="grid gap-6 text-sm font-medium">
-              <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
-                <dt className="text-[#111111]/60">Lead time</dt>
-                <dd className="text-[#111111]">{product.leadTime}</dd>
+            <dl className="grid gap-4 text-sm mt-auto">
+              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                <dt className="text-zinc-500">Lead time</dt>
+                <dd className="font-medium text-zinc-900">{product.leadTime}</dd>
               </div>
-              <div className="flex items-center justify-between border-b border-[#111111]/10 pb-4">
-                <dt className="text-[#111111]/60">Minimum order</dt>
-                <dd className="text-[#111111]">{product.minOrder} units</dd>
+              <div className="flex items-center justify-between border-b border-zinc-100 pb-3">
+                <dt className="text-zinc-500">Minimum order</dt>
+                <dd className="font-medium text-zinc-900">{product.minOrder} units</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-[#111111]/60">Finish</dt>
-                <dd className="text-[#111111]">{product.finish}</dd>
+                <dt className="text-zinc-500">Finish</dt>
+                <dd className="font-medium text-zinc-900">{product.finish}</dd>
               </div>
             </dl>
           </div>
         </div>
       </div>
 
-      <div className="rounded-[3rem] bg-[#111111] p-8 lg:p-12 text-white shadow-2xl flex flex-col relative overflow-hidden">
-        {/* Subtle decorative background for dark section */}
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none translate-y-1/3 -translate-x-1/4" />
-
-        <div className="mb-12 relative z-10">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-4">Step 2: Quote & Order</p>
-          <h2 className="text-4xl font-semibold tracking-tighter-plus">Turn the preview into production</h2>
+      <div className="rounded-3xl border border-zinc-200 bg-zinc-50 p-8 lg:p-12 shadow-sm flex flex-col">
+        <div className="mb-10">
+          <p className="text-sm font-medium text-zinc-500 mb-2">Step 2: Quote & Order</p>
+          <h2 className="text-3xl font-bold text-zinc-950">Production details</h2>
         </div>
 
-        <div className="space-y-10 flex-1 relative z-10">
+        <div className="space-y-8 flex-1">
           <div>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Logo placement</p>
-            <div className="grid gap-4 sm:grid-cols-3">
+            <p className="text-sm font-semibold text-zinc-900 mb-3">Logo placement</p>
+            <div className="grid gap-3 sm:grid-cols-3">
               {placementOptions.map((option) => {
                 const isSelected = option.value === placement;
 
@@ -299,23 +303,23 @@ export function ProductCustomizer() {
                     key={option.value}
                     type="button"
                     onClick={() => setPlacement(option.value)}
-                    className={`relative rounded-2xl border px-5 py-4 text-center transition-all duration-300 overflow-hidden ${
+                    className={`relative rounded-xl border px-4 py-3 text-center transition-all duration-300 ${
                       isSelected
-                        ? "border-transparent text-[#111111]"
-                        : "border-white/10 bg-white/5 text-white/70 hover:border-white/30 hover:bg-white/10"
+                        ? "border-zinc-900 bg-zinc-900 text-white shadow-sm"
+                        : "border-zinc-200 bg-white text-zinc-600 hover:border-zinc-300"
                     }`}
                   >
                     {isSelected && (
                       <motion.div 
                         layoutId="active-placement-bg"
-                        className="absolute inset-0 bg-[#f4f3ef]"
+                        className="absolute inset-0 bg-zinc-900 rounded-xl"
                         initial={false}
                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
                     )}
                     <div className="relative z-10">
-                      <p className="text-sm font-semibold tracking-tight">{option.label}</p>
-                      <p className={`mt-1 text-[10px] uppercase tracking-widest font-bold ${isSelected ? "text-[#111111]/50" : "text-white/40"}`}>
+                      <p className="text-sm font-medium">{option.label}</p>
+                      <p className={`mt-1 text-xs ${isSelected ? "text-zinc-300" : "text-zinc-500"}`}>
                         {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
                       </p>
                     </div>
@@ -327,68 +331,67 @@ export function ProductCustomizer() {
 
           <div className="grid gap-6 sm:grid-cols-[1fr_auto] items-end">
             <label className="block">
-              <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4 block">Quantity</span>
+              <span className="text-sm font-semibold text-zinc-900 mb-3 block">Quantity</span>
               <input
                 type="number"
                 min={product.minOrder}
                 step={50}
                 value={quantity}
                 onChange={(event) => setQuantity(Math.max(product.minOrder, Number(event.target.value) || product.minOrder))}
-                className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-white text-lg font-semibold outline-none transition focus:border-[#d9534f] focus:bg-white/10 focus:ring-1 focus:ring-[#d9534f]"
+                className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-3 text-zinc-900 text-base shadow-sm outline-none transition focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900"
               />
             </label>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-4 flex items-center h-[62px]">
-              <p className="text-xs font-bold uppercase tracking-widest text-white/50">
+            <div className="rounded-xl border border-zinc-200 bg-white px-4 py-3 flex items-center h-[50px] shadow-sm">
+              <p className="text-xs font-medium text-zinc-500">
                 MOQ: {product.minOrder}
               </p>
             </div>
           </div>
 
-          <label className="flex items-start gap-5 rounded-3xl border border-white/10 bg-white/5 p-6 cursor-pointer group hover:bg-white/10 hover:border-white/20 transition-all">
-            <div className="pt-1">
+          <label className="flex items-start gap-4 rounded-xl border border-zinc-200 bg-white p-5 cursor-pointer hover:bg-zinc-50 transition-colors shadow-sm">
+            <div className="pt-0.5">
               <input
                 type="checkbox"
                 checked={customDesign}
                 onChange={(event) => setCustomDesign(event.target.checked)}
-                className="h-5 w-5 rounded border-white/20 bg-transparent text-[#d9534f] focus:ring-[#d9534f] focus:ring-offset-[#111111]"
+                className="h-4 w-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
               />
             </div>
-            <span className="text-sm leading-relaxed text-white/70 font-medium">
-              Add a one-off custom design service for <strong className="text-white font-semibold">{currency.format(customDesignFee)}</strong>.
+            <span className="text-sm text-zinc-600">
+              Add a one-off custom design service for <strong className="text-zinc-900 font-semibold">{currency.format(customDesignFee)}</strong>.
               We turn the uploaded logo into a fully branded pack concept before production.
             </span>
           </label>
 
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#d9534f] rounded-full blur-[80px] opacity-20 pointer-events-none" />
-            <p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-6">Approximate quote</p>
-            <div className="space-y-4 text-sm text-white/70 font-medium">
+          <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+            <p className="text-sm font-semibold text-zinc-900 mb-4">Approximate quote</p>
+            <div className="space-y-3 text-sm text-zinc-600">
               <div className="flex items-center justify-between">
                 <span>Base rate per 100</span>
-                <span>{currency.format(product.basePrice)}</span>
+                <span className="font-medium text-zinc-900">{currency.format(product.basePrice)}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Placement uplift</span>
-                <span>{placementMeta.fee === 0 ? "Included" : currency.format(placementMeta.fee)}</span>
+                <span className="font-medium text-zinc-900">{placementMeta.fee === 0 ? "Included" : currency.format(placementMeta.fee)}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Production subtotal</span>
-                <span className="text-white">{currency.format(quote.subtotal)}</span>
+                <span className="font-medium text-zinc-900">{currency.format(quote.subtotal)}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Custom design</span>
-                <span>{customDesign ? currency.format(customDesignFee) : "Not added"}</span>
+                <span className="font-medium text-zinc-900">{customDesign ? currency.format(customDesignFee) : "Not added"}</span>
               </div>
-              <div className="flex items-center justify-between border-t border-white/10 pt-6 mt-6 text-xl font-semibold text-white tracking-tighter-plus">
+              <div className="flex items-center justify-between border-t border-zinc-100 pt-4 mt-4 text-lg font-bold text-zinc-950">
                 <span>Total estimate</span>
                 <span>{currency.format(quote.total)}</span>
               </div>
             </div>
           </div>
 
-          <div className="space-y-6 pt-6">
-            <p className="text-xs font-bold uppercase tracking-widest text-white/50">Shipping Details</p>
-            <div className="grid gap-5">
+          <div className="space-y-4 pt-4 border-t border-zinc-200">
+            <p className="text-sm font-semibold text-zinc-900">Shipping Details</p>
+            <div className="grid gap-4">
               <FormInput
                 label="Buyer name"
                 value={orderForm.buyerName}
@@ -427,23 +430,18 @@ export function ProductCustomizer() {
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full relative group inline-flex h-16 items-center justify-center overflow-hidden rounded-2xl bg-[#d9534f] px-8 font-medium text-white transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 mt-8"
+            className="w-full inline-flex h-12 items-center justify-center rounded-md bg-zinc-900 px-6 font-medium text-white shadow transition-colors hover:bg-zinc-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 mt-4"
           >
-            <span className="relative z-10 text-sm uppercase tracking-widest font-bold">
-              {isSubmitting ? "Processing..." : "Submit to Production Queue"}
-            </span>
-            {!isSubmitting && (
-              <div className="absolute inset-0 h-full w-full scale-0 rounded-2xl bg-white/20 transition-all duration-300 ease-out group-hover:scale-100" />
-            )}
+            {isSubmitting ? "Processing..." : "Submit to Production Queue"}
           </button>
 
           <AnimatePresence>
             {submitMessage && (
               <motion.p 
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="text-xs font-bold uppercase tracking-widest text-center text-white/90 bg-white/10 py-4 rounded-xl border border-white/20 mt-6"
+                exit={{ opacity: 0, y: -5 }}
+                className="text-sm font-medium text-center text-zinc-700 bg-white py-3 rounded-lg border border-zinc-200 mt-4 shadow-sm"
               >
                 {submitMessage}
               </motion.p>
@@ -549,13 +547,13 @@ function FormInput({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-3 block">{label}</span>
+      <span className="text-xs font-semibold text-zinc-700 mb-2 block">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm text-white font-medium outline-none transition focus:border-[#d9534f] focus:bg-white/10 focus:ring-1 focus:ring-[#d9534f] placeholder:text-white/30"
+        className="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none transition focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 placeholder:text-zinc-400"
       />
     </label>
   );
@@ -574,13 +572,13 @@ function FormTextArea({
 }) {
   return (
     <label className="block">
-      <span className="text-xs font-bold uppercase tracking-widest text-white/50 mb-3 block">{label}</span>
+      <span className="text-xs font-semibold text-zinc-700 mb-2 block">{label}</span>
       <textarea
         rows={4}
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-2xl border border-white/10 bg-white/5 px-6 py-4 text-sm text-white font-medium outline-none transition focus:border-[#d9534f] focus:bg-white/10 focus:ring-1 focus:ring-[#d9534f] placeholder:text-white/30 resize-none"
+        className="w-full rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none transition focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 placeholder:text-zinc-400 resize-none"
       />
     </label>
   );

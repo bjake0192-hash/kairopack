@@ -26,27 +26,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans tracking-tight bg-[#f4f3ef] text-[#111111]">
-        {/* Global Navigation - Ultra Minimal */}
-        <header className="fixed top-0 z-50 w-full mix-blend-difference pointer-events-none">
-          <div className="flex h-24 items-center justify-between px-6 lg:px-12 w-full mx-auto pointer-events-auto">
-            <Link href="/" className="text-white hover:opacity-70 transition-opacity duration-300">
-              <Logo className="h-8 w-auto" />
+      <body className="min-h-full flex flex-col font-sans tracking-tight bg-[var(--background)] text-[var(--foreground)]">
+        {/* Global Navigation - Clean Modern */}
+        <header className="sticky top-0 z-50 w-full bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)]">
+          <div className="flex h-16 items-center justify-between px-6 lg:px-12 w-full max-w-7xl mx-auto">
+            <Link href="/" className="text-[var(--foreground)] hover:opacity-70 transition-opacity duration-300">
+              <Logo className="h-6 w-auto" />
             </Link>
             
             <div className="flex items-center gap-8">
-              <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/80">
-                <Link href="/#products" className="hover:text-white transition-colors duration-300 uppercase tracking-widest text-[10px]">Collection</Link>
-                <Link href="/#customizer" className="hover:text-white transition-colors duration-300 uppercase tracking-widest text-[10px]">Studio</Link>
-                <Link href="/vendor" className="hover:text-white transition-colors duration-300 uppercase tracking-widest text-[10px]">Vendor</Link>
+              <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--muted-foreground)]">
+                <Link href="/#products" className="hover:text-[var(--foreground)] transition-colors duration-300">Products</Link>
+                <Link href="/#customizer" className="hover:text-[var(--foreground)] transition-colors duration-300">Customizer</Link>
+                <Link href="/vendor" className="hover:text-[var(--foreground)] transition-colors duration-300">Vendor</Link>
               </nav>
               <Link
                 href="/#customizer"
-                className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-[#111111] transition-transform hover:scale-105 active:scale-95"
+                className="inline-flex h-10 items-center justify-center rounded-md bg-[var(--primary)] px-6 text-sm font-medium text-[var(--primary-foreground)] shadow transition-colors hover:bg-[var(--primary)]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)]"
               >
-                <span className="relative z-10 text-xs uppercase tracking-widest font-bold">Start Order</span>
-                <div className="absolute inset-0 h-full w-full scale-0 rounded-full bg-[#111111] transition-all duration-300 ease-out group-hover:scale-100" />
-                <span className="absolute z-10 text-xs uppercase tracking-widest font-bold text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">Start Order</span>
+                Start Order
               </Link>
             </div>
           </div>

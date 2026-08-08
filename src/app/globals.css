@@ -3,23 +3,35 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  /* Avant-garde Industrial Light Theme */
-  --background: #f4f3ef; /* Warm off-white oatmeal */
-  --foreground: #111111; /* Soft Obsidian Black */
-  --accent: #d9534f;     /* Subtle Terracotta/Rust for food/catering warmth */
+  /* Modern E-Commerce Light Theme */
+  --background: #ffffff;
+  --foreground: #09090b; /* Zinc 950 */
+  --border: #e4e4e7; /* Zinc 200 */
+  --primary: #18181b; /* Zinc 900 */
+  --primary-foreground: #fafafa; /* Zinc 50 */
+  --muted: #f4f4f5; /* Zinc 100 */
+  --muted-foreground: #71717a; /* Zinc 500 */
 }
 
-/* Force light theme for this high-contrast avant-garde look, ignoring system dark mode for strict brand control */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #f4f3ef;
-    --foreground: #111111;
+    --background: #09090b;
+    --foreground: #fafafa;
+    --border: #27272a;
+    --primary: #fafafa;
+    --primary-foreground: #18181b;
+    --muted: #27272a;
+    --muted-foreground: #a1a1aa;
   }
 }
 
@@ -40,20 +52,15 @@ body {
 }
 
 ::selection {
-  background: var(--foreground);
-  color: var(--background);
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
-/* Custom Utilities for the Avant-Garde Feel */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
   .text-pretty {
     text-wrap: pretty;
-  }
-  /* Ultra-tight tracking for large headings */
-  .tracking-tighter-plus {
-    letter-spacing: -0.06em;
   }
 }
