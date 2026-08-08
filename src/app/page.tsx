@@ -1,4 +1,3 @@
-import { ProductCustomizer } from "@/components/product-customizer";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Box, RefreshCw, Zap, CheckCircle2 } from "lucide-react";
@@ -7,7 +6,7 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       {/* Modern Hero Section */}
-      <section className="relative pt-20 pb-32 px-6 lg:px-12 bg-white overflow-hidden">
+      <section className="relative pt-32 pb-32 px-6 lg:px-12 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 text-zinc-800 text-sm font-medium mb-8 self-start">
@@ -22,14 +21,14 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="#customizer"
+                href="/customizer"
                 className="inline-flex h-12 items-center justify-center rounded-md bg-zinc-900 px-8 text-sm font-medium text-zinc-50 shadow transition-colors hover:bg-zinc-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950"
               >
                 Start Designing
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
               <Link
-                href="#products"
+                href="/products"
                 className="inline-flex h-12 items-center justify-center rounded-md border border-zinc-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950"
               >
                 View Catalog
@@ -47,7 +46,7 @@ export default function Home() {
 
           <div className="relative aspect-square lg:aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 shadow-sm border border-zinc-200/50">
             <Image
-              src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Clean%20modern%20ecommerce%20product%20photography%20of%20a%20blank%20white%20coffee%20cup%20and%20kraft%20takeaway%20box%20on%20a%20bright%20white%20studio%20background%2C%20soft%20natural%20lighting%2C%20high%20end%20retail%20style&image_size=landscape_4_3"
+              src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&q=80&w=1600"
               alt="Premium catering packaging"
               fill
               className="object-cover object-center"
@@ -104,23 +103,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Modern Product Catalog */}
-      <section id="products" className="py-24 bg-white">
+      {/* Featured Products */}
+      <section className="py-24 bg-white border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
             <div>
               <h2 className="text-3xl font-bold tracking-tight text-zinc-950 mb-4">
-                Our Catalog
+                Featured Products
               </h2>
               <p className="text-zinc-600 text-lg">
                 Industry-standard vessels and wraps ready for your branding.
               </p>
             </div>
             <Link
-              href="#customizer"
+              href="/products"
               className="text-sm font-medium text-zinc-900 hover:text-zinc-600 transition-colors flex items-center gap-1"
             >
-              Customize Any Product <ArrowRight className="w-4 h-4" />
+              View Full Catalog <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
@@ -129,55 +128,21 @@ export default function Home() {
               title="Double Wall Cup"
               category="Hot Service"
               price="From £145 / 100 units"
-              imagePrompt="Clean%20ecommerce%20product%20photography%20of%20a%20blank%20white%20double%20wall%20coffee%20cup%20with%20white%20lid%2C%20bright%20white%20background%2C%20soft%20lighting"
+              imageUrl="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&q=80&w=800"
             />
             <CatalogCard 
               title="Kraft Salad Bowl"
               category="Cold Service"
               price="From £168 / 100 units"
-              imagePrompt="Clean%20ecommerce%20product%20photography%20of%20a%20blank%20kraft%20paper%20salad%20bowl%20with%20clear%20lid%2C%20bright%20white%20background%2C%20soft%20lighting"
+              imageUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800"
             />
             <CatalogCard 
               title="Premium Burger Box"
               category="Takeaway"
               price="From £182 / 100 units"
-              imagePrompt="Clean%20ecommerce%20product%20photography%20of%20a%20blank%20kraft%20burger%20box%20clamshell%2C%20bright%20white%20background%2C%20soft%20lighting"
-            />
-            <CatalogCard 
-              title="Twisted Handle Carrier"
-              category="Transit"
-              price="From £128 / 100 units"
-              imagePrompt="Clean%20ecommerce%20product%20photography%20of%20a%20blank%20brown%20kraft%20paper%20bag%20with%20handles%2C%20bright%20white%20background%2C%20soft%20lighting"
-            />
-            <CatalogCard 
-              title="Clear PET Cold Cup"
-              category="Cold Drinks"
-              price="From £135 / 100 units"
-              imagePrompt="Clean%20ecommerce%20product%20photography%20of%20a%20clear%20plastic%20cold%20cup%20with%20dome%20lid%2C%20bright%20white%20background%2C%20soft%20lighting"
-            />
-            <CatalogCard 
-              title="Greaseproof Wrap"
-              category="Liners"
-              price="From £85 / 100 units"
-              imagePrompt="Clean%20ecommerce%20product%20photography%20of%20folded%20white%20greaseproof%20wrapping%20paper%2C%20bright%20white%20background%2C%20soft%20lighting"
+              imageUrl="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=800"
             />
           </div>
-        </div>
-      </section>
-
-      {/* Customizer Section */}
-      <section id="customizer" className="py-24 px-6 lg:px-12 bg-zinc-50 border-t border-zinc-200">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-950 mb-4">
-              Design your packaging
-            </h2>
-            <p className="text-zinc-600 text-lg">
-              Select a product, upload your logo, and generate a production-ready brief.
-            </p>
-          </div>
-          
-          <ProductCustomizer />
         </div>
       </section>
 
@@ -193,10 +158,10 @@ export default function Home() {
           <div>
             <h4 className="font-semibold text-zinc-950 mb-4">Products</h4>
             <ul className="space-y-3 text-sm text-zinc-600">
-              <li><Link href="#" className="hover:text-zinc-950 transition-colors">Hot Cups</Link></li>
-              <li><Link href="#" className="hover:text-zinc-950 transition-colors">Cold Cups</Link></li>
-              <li><Link href="#" className="hover:text-zinc-950 transition-colors">Bowls & Containers</Link></li>
-              <li><Link href="#" className="hover:text-zinc-950 transition-colors">Bags & Carriers</Link></li>
+              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Hot Cups</Link></li>
+              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Cold Cups</Link></li>
+              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Bowls & Containers</Link></li>
+              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Bags & Carriers</Link></li>
             </ul>
           </div>
           <div>
@@ -220,12 +185,12 @@ export default function Home() {
   );
 }
 
-function CatalogCard({ title, category, price, imagePrompt }: { title: string, category: string, price: string, imagePrompt: string }) {
+function CatalogCard({ title, category, price, imageUrl }: { title: string, category: string, price: string, imageUrl: string }) {
   return (
-    <Link href="#customizer" className="group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-300 hover:shadow-md transition-all">
+    <Link href="/customizer" className="group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-300 hover:shadow-md transition-all">
       <div className="relative aspect-[4/3] bg-zinc-100 overflow-hidden border-b border-zinc-100">
         <Image
-          src={`https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=${imagePrompt}&image_size=landscape_4_3`}
+          src={imageUrl}
           alt={title}
           fill
           className="object-cover object-center group-hover:scale-105 transition-transform duration-500"

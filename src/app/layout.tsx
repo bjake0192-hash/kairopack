@@ -36,12 +36,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             
             <div className="flex items-center gap-8">
               <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--muted-foreground)]">
-                <Link href="/#products" className="hover:text-[var(--foreground)] transition-colors duration-300">Products</Link>
-                <Link href="/#customizer" className="hover:text-[var(--foreground)] transition-colors duration-300">Customizer</Link>
+                <Link href="/products" className="hover:text-[var(--foreground)] transition-colors duration-300">Products</Link>
+                <Link href="/customizer" className="hover:text-[var(--foreground)] transition-colors duration-300">Customizer</Link>
                 <Link href="/vendor" className="hover:text-[var(--foreground)] transition-colors duration-300">Vendor</Link>
               </nav>
               <Link
-                href="/#customizer"
+                href="/customizer"
                 className="inline-flex h-10 items-center justify-center rounded-md bg-[var(--primary)] px-6 text-sm font-medium text-[var(--primary-foreground)] shadow transition-colors hover:bg-[var(--primary)]/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--primary)]"
               >
                 Start Order
