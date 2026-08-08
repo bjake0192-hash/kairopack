@@ -27,9 +27,11 @@
     "picomatch": "^4.0.5",
     "tailwindcss": "^4",
     "typescript": "^5",
+    "vercel": "^58.9.0",
     "wrangler": "^3"
   },
   "overrides": {
+    "next": "$next",
     "@cloudflare/next-on-pages": {
       "next": "$next"
     }
