@@ -8,30 +8,42 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-accent: var(--accent);
+  
+  --color-brand-black: #0B0B0B;
+  --color-brand-charcoal: #151515;
+  --color-brand-offwhite: #F7F5F1;
+  --color-brand-white: #FFFFFF;
+  --color-brand-gold: #C49A62;
+  --color-brand-beige: #E9E0D4;
+  --color-brand-grey: #E7E7E7;
+
+  --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  /* Modern E-Commerce Light Theme */
-  --background: #ffffff;
-  --foreground: #09090b; /* Zinc 950 */
-  --border: #e4e4e7; /* Zinc 200 */
-  --primary: #18181b; /* Zinc 900 */
-  --primary-foreground: #fafafa; /* Zinc 50 */
-  --muted: #f4f4f5; /* Zinc 100 */
-  --muted-foreground: #71717a; /* Zinc 500 */
+  /* Premium Editorial Theme */
+  --background: #FFFFFF;
+  --foreground: #0B0B0B;
+  --border: #E7E7E7;
+  --primary: #0B0B0B;
+  --primary-foreground: #FFFFFF;
+  --muted: #F7F5F1;
+  --muted-foreground: #71717A;
+  --accent: #C49A62;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #09090b;
-    --foreground: #fafafa;
-    --border: #27272a;
-    --primary: #fafafa;
-    --primary-foreground: #18181b;
-    --muted: #27272a;
-    --muted-foreground: #a1a1aa;
+    --background: #0B0B0B;
+    --foreground: #FFFFFF;
+    --border: #151515;
+    --primary: #FFFFFF;
+    --primary-foreground: #0B0B0B;
+    --muted: #151515;
+    --muted-foreground: #A1A1AA;
+    --accent: #C49A62;
   }
 }
 

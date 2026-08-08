@@ -1,206 +1,273 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Box, RefreshCw, Zap, CheckCircle2 } from "lucide-react";
+import { ArrowRight, PenTool, Settings, Package, Truck, CheckCircle2 } from "lucide-react";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen">
-      {/* Modern Hero Section */}
-      <section className="relative pt-32 pb-32 px-6 lg:px-12 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 text-zinc-800 text-sm font-medium mb-8 self-start">
-              <span className="flex h-2 w-2 rounded-full bg-green-500"></span>
-              Now accepting new B2B orders
-            </div>
-            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-zinc-950 mb-6 text-balance">
-              Custom catering packaging, <span className="text-zinc-500">simplified.</span>
-            </h1>
-            <p className="text-lg text-zinc-600 leading-relaxed max-w-xl mb-10">
-              Upload your brand assets, preview instantly in 3D-accurate space, and order direct from certified manufacturers. No middlemen, no proofing delays.
+    <main className="flex flex-col min-h-screen bg-[#F7F5F1] text-[#0B0B0B]">
+      {/* HERO SECTION */}
+      <section className="relative min-h-[85vh] flex items-center bg-[#0B0B0B] text-white overflow-hidden pt-20">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent z-10" />
+          <Image
+            src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Dark%20studio%20photography%20of%20a%20premium%20matte%20black%20takeaway%20food%20box%20with%20subtle%20gold%20branding%2C%20soft%20directional%20lighting%2C%20premium%20food%20photography%20aesthetic&image_size=landscape_16_9"
+            alt="Premium custom packaging"
+            fill
+            className="object-cover object-right opacity-70"
+            priority
+            unoptimized
+          />
+        </div>
+        
+        <div className="relative z-20 w-full max-w-[1400px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-12">
+          <div className="flex flex-col justify-center max-w-2xl py-20">
+            <p className="text-[#C49A62] text-[11px] font-bold uppercase tracking-[0.25em] mb-6">
+              Custom Packaging, Made Simple
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/customizer"
-                className="inline-flex h-12 items-center justify-center rounded-md bg-zinc-900 px-8 text-sm font-medium text-zinc-50 shadow transition-colors hover:bg-zinc-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950"
-              >
-                Start Designing
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Link>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1]">
+              Custom packaging<br />that elevates<br />your <span className="text-[#C49A62]">brand.</span>
+            </h1>
+            <p className="text-[#E7E7E7] text-lg lg:text-xl leading-relaxed max-w-lg mb-10 font-light">
+              Premium, sustainable packaging solutions built around your product, your brand and your goals.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-5 mb-12">
               <Link
                 href="/products"
-                className="inline-flex h-12 items-center justify-center rounded-md border border-zinc-200 bg-white px-8 text-sm font-medium shadow-sm transition-colors hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950"
+                className="inline-flex h-14 items-center justify-center bg-white px-8 text-sm font-semibold text-[#0B0B0B] transition-colors hover:bg-[#E7E7E7]"
               >
-                View Catalog
+                Explore Solutions <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+              <Link
+                href="/customizer"
+                className="inline-flex h-14 items-center justify-center border border-white/20 bg-transparent px-8 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+              >
+                Get a Quote
               </Link>
             </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-zinc-500">
+            
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 text-sm text-[#A1A1AA] font-medium">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-zinc-900" /> Fast Turnaround
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A62]" /> Sustainable Materials
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-zinc-900" /> Premium Materials
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A62]" /> Low Minimum Orders
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A62]" /> Fast Turnaround Times
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div className="relative aspect-square lg:aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 shadow-sm border border-zinc-200/50">
+      {/* SECTION 2: END-TO-END SOLUTIONS */}
+      <section id="solutions" className="py-32 px-6 lg:px-12 bg-[#F7F5F1]">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="mb-20 max-w-3xl">
+            <p className="text-[#C49A62] text-[11px] font-bold uppercase tracking-[0.25em] mb-4">
+              End-to-End Packaging Solutions
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-[#0B0B0B] mb-6">
+              Everything you need to scale
+            </h2>
+            <p className="text-lg text-[#71717A] leading-relaxed">
+              From design to delivery, we make custom packaging simple, reliable and built for your business.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <SolutionCard 
+              icon={<PenTool className="w-6 h-6" />}
+              title="Custom Design"
+              description="Stand out with packaging that reflects your brand and connects with your customers."
+            />
+            <SolutionCard 
+              icon={<Settings className="w-6 h-6" />}
+              title="Premium Quality"
+              description="High-quality materials and finishes that protect your product and elevate the unboxing experience."
+            />
+            <SolutionCard 
+              icon={<Package className="w-6 h-6" />}
+              title="Flexible Production"
+              description="Scalable solutions for businesses of any size, with low minimum order quantities."
+            />
+            <SolutionCard 
+              icon={<Truck className="w-6 h-6" />}
+              title="Fast & Reliable"
+              description="Quick turnaround and dependable delivery so you can keep your business moving."
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: FEATURED PRODUCTS */}
+      <section className="py-32 px-6 lg:px-12 bg-white">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+            <div className="max-w-2xl">
+              <p className="text-[#C49A62] text-[11px] font-bold uppercase tracking-[0.25em] mb-4">
+                Featured Products
+              </p>
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-[#0B0B0B] mb-6">
+                Packaging for every<br />product and purpose
+              </h2>
+              <p className="text-lg text-[#71717A] leading-relaxed">
+                Whether you're serving street food or shipping luxury goods, we provide premium packaging across all categories.
+              </p>
+            </div>
+            <Link
+              href="/products"
+              className="inline-flex items-center text-sm font-semibold text-[#0B0B0B] hover:text-[#C49A62] transition-colors pb-2 border-b-2 border-transparent hover:border-[#C49A62]"
+            >
+              View all products <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <ProductCard 
+              title="Food Packaging"
+              description="Boxes, bowls, bags and more."
+              image="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Premium%20kraft%20burger%20box%2C%20clean%20dark%20studio%20photography%2C%20soft%20shadows&image_size=square"
+            />
+            <ProductCard 
+              title="Beverage Packaging"
+              description="Cups, sleeves and carriers."
+              image="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Premium%20branded%20matte%20black%20takeaway%20coffee%20cup%2C%20dark%20studio%20photography&image_size=square"
+            />
+            <ProductCard 
+              title="Retail Packaging"
+              description="Boxes and wraps that build brand value."
+              image="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Premium%20matte%20black%20retail%20boxes%2C%20dark%20studio%20photography&image_size=square"
+            />
+            <ProductCard 
+              title="E-Commerce Packaging"
+              description="Protective, durable packaging made to impress."
+              image="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Premium%20branded%20corrugated%20shipping%20box%20mailer%2C%20dark%20studio%20photography&image_size=square"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: WHY KAIROPACK */}
+      <section className="py-32 px-6 lg:px-12 bg-[#151515] text-white">
+        <div className="max-w-[1400px] mx-auto grid lg:grid-cols-[1fr_1.2fr] gap-16 lg:gap-24 items-center">
+          <div>
+            <p className="text-[#C49A62] text-[11px] font-bold uppercase tracking-[0.25em] mb-4">
+              Why Choose KairoPack?
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
+              More than packaging.<br />
+              A partner in your<br />
+              brand's <span className="text-[#C49A62]">success.</span>
+            </h2>
+            <p className="text-[#A1A1AA] text-lg leading-relaxed mb-12">
+              We combine creativity, quality and sustainability to deliver packaging solutions that make a real commercial impact.
+            </p>
+            <Link
+              href="/#about"
+              className="inline-flex h-12 items-center justify-center bg-white px-8 text-sm font-semibold text-[#0B0B0B] transition-colors hover:bg-[#E7E7E7]"
+            >
+              Learn More About Us <ArrowRight className="ml-2 w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-y-16 gap-x-12">
+            <div className="relative border-l border-white/10 pl-8">
+              <div className="w-12 h-12 rounded-full border border-[#C49A62]/30 flex items-center justify-center mb-6 text-[#C49A62]">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <h3 className="text-2xl font-bold tracking-tight mb-2">Sustainable<br />by design</h3>
+            </div>
+            <div className="relative border-l border-white/10 pl-8">
+              <div className="w-12 h-12 rounded-full border border-[#C49A62]/30 flex items-center justify-center mb-6 text-[#C49A62]">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <h3 className="text-2xl font-bold tracking-tight mb-2">Premium quality<br />guaranteed</h3>
+            </div>
+            <div className="relative border-l border-white/10 pl-8">
+              <div className="w-12 h-12 rounded-full border border-[#C49A62]/30 flex items-center justify-center mb-6 text-[#C49A62]">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <h3 className="text-2xl font-bold tracking-tight mb-2">Trusted by<br />businesses</h3>
+            </div>
+            <div className="relative border-l border-white/10 pl-8">
+              <div className="w-12 h-12 rounded-full border border-[#C49A62]/30 flex items-center justify-center mb-6 text-[#C49A62]">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <h3 className="text-2xl font-bold tracking-tight mb-2">Focused on your<br />brand's growth</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 5: CTA */}
+      <section className="py-32 px-6 lg:px-12 bg-[#F7F5F1]">
+        <div className="max-w-[1400px] mx-auto bg-white rounded-none overflow-hidden shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] grid lg:grid-cols-2">
+          <div className="p-12 lg:p-24 flex flex-col justify-center">
+            <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-[#0B0B0B] mb-6">
+              Ready to bring your packaging to the next level?
+            </h2>
+            <p className="text-lg text-[#71717A] leading-relaxed mb-10">
+              Let's create something your customers won't forget.
+            </p>
+            <div>
+              <Link
+                href="/customizer"
+                className="inline-flex h-14 items-center justify-center bg-[#0B0B0B] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#151515]"
+              >
+                Get Your Custom Quote <ArrowRight className="ml-2 w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+          <div className="relative min-h-[400px] lg:min-h-full bg-[#E9E0D4]">
             <Image
-              src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&q=80&w=1600"
-              alt="Premium catering packaging"
+              src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=Premium%20custom%20packaging%20box%20on%20off-white%20background%2C%20studio%20lighting&image_size=square"
+              alt="Custom packaging box"
               fill
-              className="object-cover object-center"
-              priority
+              className="object-cover"
               unoptimized
             />
           </div>
         </div>
       </section>
-
-      {/* Clean Features Section */}
-      <section className="py-24 px-6 lg:px-12 bg-zinc-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-zinc-950 mb-4">
-              Everything you need to scale
-            </h2>
-            <p className="text-zinc-600 text-lg">
-              We've streamlined the entire packaging procurement process for modern food and beverage brands.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-2xl border border-zinc-200 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-zinc-100 flex items-center justify-center mb-6">
-                <RefreshCw className="w-6 h-6 text-zinc-900" />
-              </div>
-              <h3 className="text-xl font-semibold text-zinc-950 mb-3">Instant Previews</h3>
-              <p className="text-zinc-600 leading-relaxed">
-                Upload your logo and instantly see it mapped perfectly onto our products. What you see is what we print.
-              </p>
-            </div>
-            
-            <div className="bg-white p-8 rounded-2xl border border-zinc-200 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-zinc-100 flex items-center justify-center mb-6">
-                <Box className="w-6 h-6 text-zinc-900" />
-              </div>
-              <h3 className="text-xl font-semibold text-zinc-950 mb-3">Premium Finishes</h3>
-              <p className="text-zinc-600 leading-relaxed">
-                From unbleached kraft to double-walled insulation, we source only the highest quality materials.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-2xl border border-zinc-200 shadow-sm">
-              <div className="w-12 h-12 rounded-xl bg-zinc-100 flex items-center justify-center mb-6">
-                <Zap className="w-6 h-6 text-zinc-900" />
-              </div>
-              <h3 className="text-xl font-semibold text-zinc-950 mb-3">Direct Production</h3>
-              <p className="text-zinc-600 leading-relaxed">
-                Connect directly with certified manufacturers through our vendor portal. No brokers, better prices.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="py-24 bg-white border-t border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-zinc-950 mb-4">
-                Featured Products
-              </h2>
-              <p className="text-zinc-600 text-lg">
-                Industry-standard vessels and wraps ready for your branding.
-              </p>
-            </div>
-            <Link
-              href="/products"
-              className="text-sm font-medium text-zinc-900 hover:text-zinc-600 transition-colors flex items-center gap-1"
-            >
-              View Full Catalog <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <CatalogCard 
-              title="Double Wall Cup"
-              category="Hot Service"
-              price="From £145 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&q=80&w=800"
-            />
-            <CatalogCard 
-              title="Kraft Salad Bowl"
-              category="Cold Service"
-              price="From £168 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800"
-            />
-            <CatalogCard 
-              title="Premium Burger Box"
-              category="Takeaway"
-              price="From £182 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=800"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Standard Footer */}
-      <footer className="bg-white border-t border-zinc-200 py-16 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[2fr_1fr_1fr] gap-12 mb-16">
-          <div>
-            <h3 className="text-xl font-bold text-zinc-950 mb-4">Kairo Pack</h3>
-            <p className="text-zinc-600 max-w-sm">
-              The modern standard for custom catering packaging. Direct-to-manufacturer pricing with instant visual proofing.
-            </p>
-          </div>
-          <div>
-            <h4 className="font-semibold text-zinc-950 mb-4">Products</h4>
-            <ul className="space-y-3 text-sm text-zinc-600">
-              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Hot Cups</Link></li>
-              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Cold Cups</Link></li>
-              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Bowls & Containers</Link></li>
-              <li><Link href="/products" className="hover:text-zinc-950 transition-colors">Bags & Carriers</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-zinc-950 mb-4">Company</h4>
-            <ul className="space-y-3 text-sm text-zinc-600">
-              <li><Link href="#" className="hover:text-zinc-950 transition-colors">About</Link></li>
-              <li><Link href="#" className="hover:text-zinc-950 transition-colors">Contact</Link></li>
-              <li><Link href="/vendor" className="hover:text-zinc-950 transition-colors">Vendor Login</Link></li>
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto pt-8 border-t border-zinc-100 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-zinc-500">
-          <p>© {new Date().getFullYear()} Kairo Pack. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-zinc-950 transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-zinc-950 transition-colors">Terms</Link>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
 
-function CatalogCard({ title, category, price, imageUrl }: { title: string, category: string, price: string, imageUrl: string }) {
+function SolutionCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <Link href="/customizer" className="group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-300 hover:shadow-md transition-all">
-      <div className="relative aspect-[4/3] bg-zinc-100 overflow-hidden border-b border-zinc-100">
+    <div className="group bg-white p-10 border border-[#E7E7E7] transition-all duration-300 hover:-translate-y-2 hover:border-[#C49A62] hover:shadow-lg">
+      <div className="w-12 h-12 rounded-full bg-[#F7F5F1] flex items-center justify-center mb-8 text-[#0B0B0B] group-hover:text-[#C49A62] group-hover:bg-[#C49A62]/10 transition-colors">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold text-[#0B0B0B] mb-4 tracking-tight">{title}</h3>
+      <p className="text-[#71717A] leading-relaxed text-sm">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+function ProductCard({ title, description, image }: { title: string; description: string; image: string }) {
+  return (
+    <Link href="/products" className="group block">
+      <div className="relative aspect-[4/5] bg-[#E9E0D4] overflow-hidden mb-6">
         <Image
-          src={imageUrl}
+          src={image}
           alt={title}
           fill
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)]"
           unoptimized
         />
       </div>
-      <div className="p-6">
-        <div className="text-xs font-medium text-zinc-500 mb-2 uppercase tracking-wider">{category}</div>
-        <h3 className="text-lg font-semibold text-zinc-950 mb-2 group-hover:text-zinc-700 transition-colors">{title}</h3>
-        <p className="text-sm text-zinc-600 font-medium">{price}</p>
+      <div>
+        <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">{title}</p>
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-bold text-[#0B0B0B] tracking-tight">{title}</h3>
+          <ArrowRight className="w-5 h-5 text-[#0B0B0B] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+        </div>
+        <p className="text-[#71717A] text-sm mt-2">{description}</p>
       </div>
     </Link>
   );
