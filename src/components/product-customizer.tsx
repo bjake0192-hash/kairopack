@@ -28,24 +28,24 @@ const currency = new Intl.NumberFormat("en-GB", {
 
 const logoPositions: Record<ProductKind, Record<LogoPlacement, string>> = {
   cup: {
-    top: "top-[23%] left-1/2 h-16 w-24 -translate-x-1/2",
-    middle: "top-[39%] left-1/2 h-20 w-28 -translate-x-1/2",
-    bottom: "top-[57%] left-1/2 h-16 w-24 -translate-x-1/2",
+    top: "top-[18%] left-1/2 h-16 w-24 -translate-x-1/2",
+    middle: "top-[37%] left-1/2 h-20 w-28 -translate-x-1/2",
+    bottom: "top-[58%] left-1/2 h-16 w-24 -translate-x-1/2",
   },
   bowl: {
-    top: "top-[34%] left-1/2 h-14 w-32 -translate-x-1/2",
-    middle: "top-[46%] left-1/2 h-16 w-36 -translate-x-1/2",
-    bottom: "top-[58%] left-1/2 h-12 w-32 -translate-x-1/2",
+    top: "top-[27%] left-1/2 h-14 w-32 -translate-x-1/2",
+    middle: "top-[44%] left-1/2 h-16 w-36 -translate-x-1/2",
+    bottom: "top-[61%] left-1/2 h-12 w-32 -translate-x-1/2",
   },
   box: {
-    top: "top-[28%] left-1/2 h-14 w-32 -translate-x-1/2",
-    middle: "top-[45%] left-1/2 h-20 w-36 -translate-x-1/2",
-    bottom: "top-[61%] left-1/2 h-12 w-28 -translate-x-1/2",
+    top: "top-[19%] left-1/2 h-14 w-32 -translate-x-1/2",
+    middle: "top-[43%] left-1/2 h-20 w-36 -translate-x-1/2",
+    bottom: "top-[65%] left-1/2 h-12 w-28 -translate-x-1/2",
   },
   bag: {
-    top: "top-[30%] left-1/2 h-14 w-24 -translate-x-1/2",
-    middle: "top-[46%] left-1/2 h-20 w-28 -translate-x-1/2",
-    bottom: "top-[65%] left-1/2 h-12 w-24 -translate-x-1/2",
+    top: "top-[26%] left-1/2 h-14 w-24 -translate-x-1/2",
+    middle: "top-[45%] left-1/2 h-20 w-28 -translate-x-1/2",
+    bottom: "top-[67%] left-1/2 h-12 w-24 -translate-x-1/2",
   },
 };
 
@@ -465,17 +465,20 @@ function PackagingPreview({
   logoPreview: string | null;
 }) {
   return (
-    <div className="relative flex min-h-[420px] items-center justify-center overflow-hidden rounded-[1.75rem] bg-[radial-gradient(circle_at_top,_#fff_0%,_#f5f0e9_48%,_#ece5db_100%)]">
+    <div className="relative flex min-h-[420px] flex-1 items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_top,_#fff_0%,_#f5f0e9_48%,_#ece5db_100%)]">
       <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-zinc-900/10 blur-2xl" />
-      <PackagingShell kind={kind} accent={accent} />
-      <div
-        className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/75 px-2 text-center shadow-sm transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
-      >
-        {logoPreview ? (
-          <Image src={logoPreview} alt="Uploaded logo preview" fill unoptimized className="object-contain p-1" />
-        ) : (
-          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-700">Your Logo</span>
-        )}
+      
+      <div className="relative flex items-center justify-center">
+        <PackagingShell kind={kind} accent={accent} />
+        <div
+          className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/75 px-2 text-center shadow-sm transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
+        >
+          {logoPreview ? (
+            <Image src={logoPreview} alt="Uploaded logo preview" fill unoptimized className="object-contain p-1" />
+          ) : (
+            <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-700">Your Logo</span>
+          )}
+        </div>
       </div>
     </div>
   );
