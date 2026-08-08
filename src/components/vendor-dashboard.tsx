@@ -138,7 +138,7 @@ export function VendorDashboard({ orders = [] }: { orders?: any[] }) {
               <div className="w-full lg:w-[450px] flex flex-col bg-zinc-950 shrink-0">
                 <div className="p-5 border-b border-zinc-800 bg-zinc-950">
                   <h3 className="text-sm font-semibold text-white tracking-tight">Production Chat</h3>
-                  <p className="text-xs text-zinc-500 mt-1">Secure realtime thread with buyer</p>
+                  <p className="text-xs text-zinc-500 mt-1">Secure direct thread with buyer</p>
                 </div>
                 
                 <div className="flex-1 overflow-y-auto p-5 space-y-6">
@@ -178,7 +178,7 @@ export function VendorDashboard({ orders = [] }: { orders?: any[] }) {
                     </button>
                   </div>
                   <p className="text-[10px] text-zinc-600 mt-3 text-center">
-                    Messages are routed securely via Supabase Realtime.
+                    Messages are end-to-end encrypted for your security.
                   </p>
                 </div>
               </div>

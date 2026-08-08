@@ -64,13 +64,13 @@ export default function Home() {
           />
           <FeatureCard 
             number="03"
-            title="Blind Routing"
-            description="Orders flow directly to certified manufacturers. The supply chain remains completely invisible to buyers."
+            title="Direct to Manufacturer"
+            description="Orders flow directly to certified production facilities, cutting out the middleman and saving you money."
           />
           <FeatureCard 
             number="04"
-            title="Realtime Chat"
-            description="Clarify artwork specifications securely. Talk directly with production without exposing contact details."
+            title="Dedicated Support"
+            description="Clarify artwork specifications securely. Talk directly with production experts to ensure your branding is perfect."
           />
         </div>
       </section>
@@ -152,30 +152,34 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer / Backend Notes */}
+      {/* Footer */}
       <footer className="border-t border-zinc-200 bg-zinc-950 py-20 px-8 lg:px-16 text-zinc-400 text-sm">
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12 lg:gap-24">
           <div>
-            <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Kairo Pack Architecture</p>
-            <p className="max-w-md leading-relaxed">
-              This storefront runs on Next.js 16, utilizing React Server Components. Supabase manages the secure vendor routing, Row Level Security (RLS) policies, and Realtime WebSocket connections for the hidden chat. Resend triggers all transactional order and message events.
+            <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Kairo Pack</p>
+            <p className="max-w-md leading-relaxed mb-6">
+              The professional standard for custom catering packaging. We provide high-end, sustainable vessels with instant branding previews and direct-to-manufacturer pricing.
+            </p>
+            <p className="text-xs text-zinc-600">
+              © {new Date().getFullYear()} Kairo Pack. All rights reserved.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 lg:justify-end">
             <div>
-              <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Stack</p>
+              <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Company</p>
               <ul className="space-y-3">
-                <li>Next.js App Router</li>
-                <li>Tailwind CSS v4</li>
-                <li>Supabase Auth & DB</li>
-                <li>Resend Email API</li>
+                <li><a href="#" className="hover:text-white transition">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition">Sustainability</a></li>
+                <li><a href="#" className="hover:text-white transition">Contact</a></li>
+                <li><a href="/vendor" className="hover:text-white transition">Vendor Portal</a></li>
               </ul>
             </div>
             <div>
-              <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Workflows</p>
+              <p className="text-zinc-50 font-semibold mb-4 tracking-tight">Legal</p>
               <ul className="space-y-3">
-                <li><a href="#customizer" className="hover:text-white transition">Product Customizer</a></li>
-                <li><a href="/vendor" className="hover:text-white transition">Vendor Dashboard</a></li>
+                <li><a href="#" className="hover:text-white transition">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition">Shipping & Returns</a></li>
               </ul>
             </div>
           </div>

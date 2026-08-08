@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Kairo Pack | Custom Catering Packaging",
   description:
-    "Custom catering packaging storefront with upload-based logo previews, vendor order routing, Supabase chat, and Resend email notifications.",
+    "Premium custom catering packaging. Upload your logo for instant live previews and order direct from certified manufacturers.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
