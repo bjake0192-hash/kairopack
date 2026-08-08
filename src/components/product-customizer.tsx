@@ -33,26 +33,33 @@ const productImages: Record<string, string> = {
   "carrier-bag": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600"
 };
 
+const previewImages: Record<ProductKind, string> = {
+  cup: "https://images.unsplash.com/photo-1550907589-94073b64c0db?auto=format&fit=crop&q=80&w=1200", // Dark takeaway cup
+  bowl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1200", // Salad bowl
+  box: "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=1200", // Burger box
+  bag: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200", // Carrier bag
+};
+
 const logoPositions: Record<ProductKind, Record<LogoPlacement, string>> = {
   cup: {
-    top: "top-[25%] left-1/2 h-16 w-24 -translate-x-1/2",
-    middle: "top-[40%] left-1/2 h-20 w-28 -translate-x-1/2",
-    bottom: "top-[60%] left-1/2 h-16 w-24 -translate-x-1/2",
+    top: "top-[35%] left-[50%] h-20 w-32 -translate-x-1/2 -translate-y-1/2 rotate-[-2deg]",
+    middle: "top-[50%] left-[50%] h-24 w-36 -translate-x-1/2 -translate-y-1/2 rotate-[-2deg]",
+    bottom: "top-[65%] left-[50%] h-20 w-32 -translate-x-1/2 -translate-y-1/2 rotate-[-2deg]",
   },
   bowl: {
-    top: "top-[30%] left-1/2 h-14 w-32 -translate-x-1/2",
-    middle: "top-[45%] left-1/2 h-16 w-36 -translate-x-1/2",
-    bottom: "top-[60%] left-1/2 h-12 w-32 -translate-x-1/2",
+    top: "top-[40%] left-[50%] h-16 w-32 -translate-x-1/2 -translate-y-1/2",
+    middle: "top-[55%] left-[50%] h-20 w-36 -translate-x-1/2 -translate-y-1/2",
+    bottom: "top-[70%] left-[50%] h-16 w-32 -translate-x-1/2 -translate-y-1/2",
   },
   box: {
-    top: "top-[25%] left-1/2 h-14 w-32 -translate-x-1/2",
-    middle: "top-[45%] left-1/2 h-20 w-36 -translate-x-1/2",
-    bottom: "top-[65%] left-1/2 h-12 w-28 -translate-x-1/2",
+    top: "top-[40%] left-[50%] h-20 w-32 -translate-x-1/2 -translate-y-1/2",
+    middle: "top-[55%] left-[50%] h-24 w-36 -translate-x-1/2 -translate-y-1/2",
+    bottom: "top-[70%] left-[50%] h-20 w-32 -translate-x-1/2 -translate-y-1/2",
   },
   bag: {
-    top: "top-[30%] left-1/2 h-14 w-24 -translate-x-1/2",
-    middle: "top-[45%] left-1/2 h-20 w-28 -translate-x-1/2",
-    bottom: "top-[65%] left-1/2 h-12 w-24 -translate-x-1/2",
+    top: "top-[45%] left-[50%] h-20 w-32 -translate-x-1/2 -translate-y-1/2",
+    middle: "top-[60%] left-[50%] h-28 w-40 -translate-x-1/2 -translate-y-1/2",
+    bottom: "top-[75%] left-[50%] h-20 w-32 -translate-x-1/2 -translate-y-1/2",
   },
 };
 
@@ -263,8 +270,8 @@ export function ProductCustomizer() {
           <div className="mb-6">
             <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight mb-2">Live Preview</h2>
           </div>
-          <div className="rounded-[16px] bg-[#F7F5F1] border border-[#E7E7E7] p-8 overflow-hidden relative flex flex-col items-center justify-center min-h-[500px]">
-            <PackagingPreview kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
+          <div className="rounded-[16px] bg-[#F7F5F1] border border-[#E7E7E7] overflow-hidden relative flex flex-col items-center justify-center min-h-[400px] lg:min-h-[500px]">
+            <PackagingPreview kind={product.kind} placement={placement} logoPreview={logoPreview} />
             
             {/* Preview Controls */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full border border-[#E7E7E7] shadow-sm">
@@ -508,28 +515,40 @@ export function ProductCustomizer() {
 
 function PackagingPreview({
   kind,
-  accent,
   placement,
   logoPreview,
 }: {
   kind: ProductKind;
-  accent: string;
   placement: LogoPlacement;
   logoPreview: string | null;
 }) {
   return (
     <div className="relative flex w-full h-full items-center justify-center">
-      <div className="absolute inset-x-10 bottom-8 h-10 rounded-full bg-[#0B0B0B]/5 blur-2xl" />
+      <div className="absolute inset-0">
+        <Image
+          src={previewImages[kind]}
+          alt={`${kind} preview`}
+          fill
+          unoptimized
+          className="object-cover opacity-95"
+        />
+        {/* Dark gradient overlay to ensure the logo pops if needed, though Unsplash images chosen are good */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent mix-blend-multiply" />
+      </div>
       
-      <div className="relative flex items-center justify-center scale-110 sm:scale-125 lg:scale-100">
-        <PackagingShell kind={kind} accent={accent} />
+      <div className="relative w-full h-full max-w-[600px] aspect-[4/3] sm:aspect-auto">
         <div
-          className={`absolute z-20 flex items-center justify-center overflow-hidden rounded-md border border-black/10 bg-white/80 px-2 text-center shadow-sm transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
+          className={`absolute z-20 flex items-center justify-center overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.2,1,0.2,1)] ${logoPositions[kind][placement]}`}
         >
           {logoPreview ? (
-            <Image src={logoPreview} alt="Uploaded logo preview" fill unoptimized className="object-contain p-1" />
+            <Image src={logoPreview} alt="Uploaded logo preview" fill unoptimized className="object-contain drop-shadow-md mix-blend-multiply opacity-90" />
           ) : (
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0B0B0B]/40">Your Logo</span>
+            <div className="flex flex-col items-center justify-center text-center opacity-70 mix-blend-multiply">
+              <div className="w-10 h-10 mb-1 border-[3px] border-current rounded-full flex items-center justify-center">
+                 <span className="font-bold text-xs">A</span>
+              </div>
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] leading-tight">Acme<br/>Coffee Co.</span>
+            </div>
           )}
         </div>
       </div>
@@ -537,56 +556,7 @@ function PackagingPreview({
   );
 }
 
-function PackagingShell({ kind, accent }: { kind: ProductKind; accent: string }) {
-  if (kind === "cup") {
-    return (
-      <svg viewBox="0 0 360 420" className="relative z-10 h-[360px] w-[300px]">
-        <ellipse cx="180" cy="372" rx="88" ry="18" fill="#00000008" />
-        <ellipse cx="180" cy="96" rx="102" ry="26" fill="#e4d4c1" />
-        <path d="M96 96h168l-28 248c-3 25-25 44-50 44h-12c-25 0-47-19-50-44L96 96Z" fill="#f8f5ef" />
-        <path d="M96 96h168l-8 68H104l-8-68Z" fill={accent} opacity="0.2" />
-        <ellipse cx="180" cy="96" rx="102" ry="24" fill="#f1e4d5" />
-        <ellipse cx="180" cy="84" rx="110" ry="28" fill="#151515" />
-        <ellipse cx="180" cy="84" rx="96" ry="19" fill="#2b2621" />
-      </svg>
-    );
-  }
 
-  if (kind === "bowl") {
-    return (
-      <svg viewBox="0 0 420 340" className="relative z-10 h-[300px] w-[340px]">
-        <ellipse cx="210" cy="286" rx="118" ry="20" fill="#00000008" />
-        <ellipse cx="210" cy="118" rx="150" ry="36" fill="#efe4d8" />
-        <path d="M78 118h264c-6 92-51 145-132 145S84 210 78 118Z" fill="#faf6f0" />
-        <path d="M78 118h264c-2 22-6 40-11 54H89c-5-14-9-32-11-54Z" fill={accent} opacity="0.2" />
-        <ellipse cx="210" cy="104" rx="160" ry="34" fill="#e0d1c0" />
-        <ellipse cx="210" cy="94" rx="170" ry="38" fill="#151515" />
-      </svg>
-    );
-  }
-
-  if (kind === "box") {
-    return (
-      <svg viewBox="0 0 420 340" className="relative z-10 h-[300px] w-[340px]">
-        <ellipse cx="210" cy="286" rx="128" ry="20" fill="#00000008" />
-        <path d="M96 118 210 74l114 44-114 44-114-44Z" fill="#f4ebe2" />
-        <path d="M96 118v98l114 52v-106L96 118Z" fill="#efe3d7" />
-        <path d="M324 118v98l-114 52v-106l114-44Z" fill="#e6d8c9" />
-        <path d="M125 130h170v102H125Z" fill="#faf6f0" />
-        <path d="M125 130h170v28H125Z" fill={accent} opacity="0.2" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg viewBox="0 0 360 420" className="relative z-10 h-[360px] w-[300px]">
-      <ellipse cx="180" cy="374" rx="98" ry="20" fill="#00000008" />
-      <path d="M124 84c0-10 8-18 18-18h14c10 0 18 8 18 18v18h12V84c0-10 8-18 18-18h14c10 0 18 8 18 18v18h8c17 0 30 13 30 30v196c0 17-13 30-30 30H102c-17 0-30-13-30-30V132c0-17 13-30 30-30h22V84Z" fill="#faf6f0" />
-      <path d="M72 132c0-17 13-30 30-30h156c17 0 30 13 30 30v44H72v-44Z" fill={accent} opacity="0.2" />
-      <path d="M124 84c0-10 8-18 18-18h14c10 0 18 8 18 18v24h-18V88c0-2-2-4-4-4h-10c-2 0-4 2-4 4v20h-14V84Zm80 0c0-10 8-18 18-18h14c10 0 18 8 18 18v24h-14V88c0-2-2-4-4-4h-10c-2 0-4 2-4 4v20h-18V84Z" fill="#b6977f" />
-    </svg>
-  );
-}
 
 function FormInput({
   label,

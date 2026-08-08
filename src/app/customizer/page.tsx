@@ -1,5 +1,4 @@
 import { ProductCustomizer } from "@/components/product-customizer";
-import Link from "next/link";
 import Image from "next/image";
 import { Eye, ShieldCheck, Truck, Sparkles } from "lucide-react";
 

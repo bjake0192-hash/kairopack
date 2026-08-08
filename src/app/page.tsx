@@ -127,7 +127,7 @@ export default function Home() {
                 Packaging for every<br />product and purpose
               </h2>
               <p className="text-lg text-[#71717A] leading-relaxed">
-                Whether you're serving street food or shipping luxury goods, we provide premium packaging across all categories.
+                Whether you&apos;re serving street food or shipping luxury goods, we provide premium packaging across all categories.
               </p>
             </div>
             <Link
@@ -206,7 +206,7 @@ export default function Home() {
             <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8 leading-[1.1]">
               More than packaging.<br />
               A partner in your<br />
-              brand's <span className="text-[#C49A62]">success.</span>
+              brand&apos;s <span className="text-[#C49A62]">success.</span>
             </h2>
             <p className="text-[#A1A1AA] text-lg leading-relaxed mb-12 max-w-md">
               We combine creativity, quality and sustainability to deliver packaging solutions that make an impact.
@@ -234,7 +234,7 @@ export default function Home() {
             </div>
             <div className="relative border-l border-white/10 pl-8">
               <TrendingUp className="w-8 h-8 text-[#C49A62] mb-6" strokeWidth={1.5} />
-              <h3 className="text-2xl font-bold tracking-tight mb-2">Focused on your<br />brand's growth</h3>
+              <h3 className="text-2xl font-bold tracking-tight mb-2">Focused on your<br />brand&apos;s growth</h3>
             </div>
           </div>
         </div>
@@ -287,7 +287,7 @@ export default function Home() {
               Ready to bring your packaging to the next level?
             </h2>
             <p className="text-lg text-[#71717A] leading-relaxed mb-10">
-              Let's create something your customers won't forget.
+              Let&apos;s create something your customers won&apos;t forget.
             </p>
             <div>
               <Link

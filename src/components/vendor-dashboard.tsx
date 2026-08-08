@@ -6,7 +6,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import { sampleConversation, vendorOrders } from "@/lib/site-data";
 import { ArrowLeft, Send } from "lucide-react";
 
-export function VendorDashboard({ orders = [] }: { orders?: any[] }) {
+type SupabaseOrder = {
+  order_number: string;
+  buyer_name: string;
+  buyer_company?: string;
+  shipping_address: string;
+  product_name: string;
+  quantity: number;
+  placement: string;
+  custom_design: boolean;
+  status: string;
+  created_at: string;
+  buyer_notes?: string;
+};
+
+export function VendorDashboard({ orders = [] }: { orders?: SupabaseOrder[] }) {
   const displayOrders = orders.length > 0 
     ? orders.map(o => ({
         id: o.order_number,
@@ -142,7 +156,7 @@ export function VendorDashboard({ orders = [] }: { orders?: any[] }) {
                       <h3 className="text-sm font-semibold text-zinc-900">Buyer Notes</h3>
                       <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-6">
                         <p className="text-sm text-zinc-700 leading-relaxed italic">
-                          "{selectedOrder.messagePreview}"
+                          &quot;{selectedOrder.messagePreview}&quot;
                         </p>
                       </div>
                     </div>
