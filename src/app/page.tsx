@@ -143,13 +143,13 @@ export default function Home() {
               category="FOOD PACKAGING"
               title="Food Packaging"
               description="Boxes, bowls, bags and more."
-              image="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=800"
+              image="/images/foodpackaging.png"
             />
             <ProductCard 
               category="BEVERAGE PACKAGING"
               title="Beverage Packaging"
               description="Cups, sleeves and carriers."
-              image="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&q=80&w=800"
+              image="/images/beveragpackaging.png"
             />
             <ProductCard 
               category="RETAIL PACKAGING"
