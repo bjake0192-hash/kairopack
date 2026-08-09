@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
 
-export function Logo({ className = "h-10" }: { className?: string }) {
+export function Logo({ className = "h-10 w-[180px]" }: { className?: string }) {
   return (
-    <div className={`relative ${className} w-[180px]`}>
+    <div className={`relative ${className}`}>
       <Image 
         src="/images/logo.png"
         alt="KairoPack Logo"
