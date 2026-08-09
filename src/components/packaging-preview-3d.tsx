@@ -13,7 +13,13 @@ interface PackagingPreview3DProps {
   accent: string;
 }
 
-function PackagingModel({ kind, logoPreview, placement, accent }: PackagingPreview3DProps) {
+interface PackagingModelProps extends PackagingPreview3DProps {
+  logoScale: number;
+  logoX: number;
+  logoY: number;
+}
+
+function PackagingModel({ kind, logoPreview, placement, accent, logoScale, logoX, logoY }: PackagingModelProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
 
@@ -92,13 +98,18 @@ function PackagingModel({ kind, logoPreview, placement, accent }: PackagingPrevi
     // Add the base position Y so it stays relative to the object's center
     y += position[1];
 
-    const scale = (kind === "cup" || kind === "bag") ? 1.4 : 1.8;
+    // Apply user offsets
+    const finalX = logoX;
+    const finalY = y + logoY;
+
+    const baseScale = (kind === "cup" || kind === "bag") ? 1.4 : 1.8;
+    const finalScale = baseScale * logoScale;
 
     return { 
-      decalPosition: new THREE.Vector3(0, y, z),
-      decalScale: new THREE.Vector3(scale, scale, scale)
+      decalPosition: new THREE.Vector3(finalX, finalY, z),
+      decalScale: new THREE.Vector3(finalScale, finalScale, finalScale)
     };
-  }, [kind, placement, position]);
+  }, [kind, placement, position, logoScale, logoX, logoY]);
 
   return (
     <mesh ref={meshRef} geometry={geometry} position={position} castShadow receiveShadow>
@@ -128,6 +139,17 @@ function PackagingModel({ kind, logoPreview, placement, accent }: PackagingPrevi
 }
 
 export function PackagingPreview3D(props: PackagingPreview3DProps) {
+  const [logoScale, setLogoScale] = useState(1);
+  const [logoX, setLogoX] = useState(0);
+  const [logoY, setLogoY] = useState(0);
+
+  // Reset adjustments if product changes
+  useEffect(() => {
+    setLogoScale(1);
+    setLogoX(0);
+    setLogoY(0);
+  }, [props.kind, props.logoPreview]);
+
   return (
     <div className="absolute inset-0 w-full h-full cursor-grab active:cursor-grabbing">
       <Canvas shadows camera={{ position: [0, 3, 7], fov: 45 }}>
@@ -148,7 +170,7 @@ export function PackagingPreview3D(props: PackagingPreview3DProps) {
         
         {/* Center the model visually */}
         <group position={[0, -1.5, 0]}>
-          <PackagingModel {...props} />
+          <PackagingModel {...props} logoScale={logoScale} logoX={logoX} logoY={logoY} />
           {/* Ground shadow for realism */}
           <ContactShadows 
             position={[0, 0, 0]} 
@@ -177,6 +199,49 @@ export function PackagingPreview3D(props: PackagingPreview3DProps) {
         <div className="w-2 h-2 rounded-full bg-[#C49A62] animate-pulse" />
         <span className="text-[10px] font-bold tracking-widest uppercase text-[#0B0B0B]">Interactive 3D</span>
       </div>
+
+      {/* Logo Adjustment Controls */}
+      {props.logoPreview && (
+        <div className="absolute bottom-6 right-6 bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-[#E7E7E7] shadow-lg w-56 flex flex-col gap-4 z-10 cursor-default">
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-[#0B0B0B] border-b border-[#E7E7E7] pb-2">Logo Adjustments</h4>
+          
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-semibold text-[#0B0B0B] flex justify-between">
+              Size <span className="text-[#C49A62]">{Math.round(logoScale * 100)}%</span>
+            </label>
+            <input 
+              type="range" min="0.2" max="2.5" step="0.05" 
+              value={logoScale} 
+              onChange={(e) => setLogoScale(parseFloat(e.target.value))} 
+              className="w-full h-1 bg-[#E7E7E7] rounded-lg appearance-none cursor-pointer accent-[#0B0B0B]" 
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-semibold text-[#0B0B0B] flex justify-between">
+              Horizontal <span className="text-[#71717A]">{logoX > 0 ? 'Right' : logoX < 0 ? 'Left' : 'Center'}</span>
+            </label>
+            <input 
+              type="range" min="-1.5" max="1.5" step="0.05" 
+              value={logoX} 
+              onChange={(e) => setLogoX(parseFloat(e.target.value))} 
+              className="w-full h-1 bg-[#E7E7E7] rounded-lg appearance-none cursor-pointer accent-[#0B0B0B]" 
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-xs font-semibold text-[#0B0B0B] flex justify-between">
+              Vertical <span className="text-[#71717A]">{logoY > 0 ? 'Up' : logoY < 0 ? 'Down' : 'Center'}</span>
+            </label>
+            <input 
+              type="range" min="-2" max="2" step="0.05" 
+              value={logoY} 
+              onChange={(e) => setLogoY(parseFloat(e.target.value))} 
+              className="w-full h-1 bg-[#E7E7E7] rounded-lg appearance-none cursor-pointer accent-[#0B0B0B]" 
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
