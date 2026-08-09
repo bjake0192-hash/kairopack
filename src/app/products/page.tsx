@@ -25,7 +25,7 @@ export default function ProductsPage() {
 
       <section className="py-16 bg-[#F7F5F1] flex-1">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
             <CatalogCard 
               title="Double Wall Coffee Cup"
               category="Hot Service"
@@ -73,12 +73,12 @@ function CatalogCard({ title, category, price, imageUrl, href }: { title: string
           unoptimized
         />
       </div>
-      <div className="p-8">
-        <div className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">{category}</div>
-        <h3 className="text-xl font-bold text-[#0B0B0B] mb-2 group-hover:text-[#C49A62] transition-colors">{title}</h3>
-        <p className="text-sm text-[#71717A] font-medium mb-6">{price}</p>
-        <div className="flex items-center text-sm font-semibold text-[#0B0B0B] group-hover:text-[#C49A62] transition-colors">
-          Configure <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      <div className="p-5">
+        <div className="text-[#C49A62] text-[9px] font-bold uppercase tracking-[0.2em] mb-2">{category}</div>
+        <h3 className="text-lg font-bold text-[#0B0B0B] mb-1 group-hover:text-[#C49A62] transition-colors line-clamp-1">{title}</h3>
+        <p className="text-xs text-[#71717A] font-medium mb-4">{price}</p>
+        <div className="flex items-center text-xs font-semibold text-[#0B0B0B] group-hover:text-[#C49A62] transition-colors">
+          Configure <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
     </Link>
