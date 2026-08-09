@@ -27,7 +27,8 @@ export function AdminDashboard() {
         minOrder: 500,
         leadTime: "10-14 working days",
         accent: "#000000",
-        finish: "Standard finish"
+        finish: "Standard finish",
+        image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1600"
       });
     }
     setIsModalOpen(true);
@@ -237,6 +238,18 @@ export function AdminDashboard() {
                     className="w-full p-3 text-sm border border-[#E7E7E7] rounded-lg focus:outline-none focus:border-[#C49A62]"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-[#0B0B0B] mb-2">Image URL</label>
+                <input 
+                  required
+                  type="text" 
+                  value={editingProduct.image || ""}
+                  onChange={(e) => setEditingProduct({...editingProduct, image: e.target.value})}
+                  placeholder="https://images.unsplash.com/..."
+                  className="w-full p-3 text-sm border border-[#E7E7E7] rounded-lg focus:outline-none focus:border-[#C49A62]"
+                />
               </div>
 
               <div className="flex justify-end gap-4 mt-4">

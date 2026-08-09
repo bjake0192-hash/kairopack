@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { products } from "@/lib/site-data";
 
 export default function ProductsPage() {
   return (
@@ -26,34 +27,16 @@ export default function ProductsPage() {
       <section className="py-16 bg-[#F7F5F1] flex-1">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
-            <CatalogCard 
-              title="Double Wall Coffee Cup"
-              category="Hot Service"
-              price="From £145 / 100 units"
-              imageUrl="/images/beveragpackaging.png"
-              href="/products/double-wall-cup"
-            />
-            <CatalogCard 
-              title="Custom Salad Bowl"
-              category="Cold Service"
-              price="From £168 / 100 units"
-              imageUrl="/images/ecomm.png"
-              href="/products/salad-bowl"
-            />
-            <CatalogCard 
-              title="Burger & Meal Box"
-              category="Takeaway"
-              price="From £182 / 100 units"
-              imageUrl="/images/foodpackaging.png"
-              href="/products/burger-box"
-            />
-            <CatalogCard 
-              title="Luxury Carrier Bag"
-              category="Transit"
-              price="From £128 / 100 units"
-              imageUrl="/images/retail.png"
-              href="/products/carrier-bag"
-            />
+            {products.map((product) => (
+              <CatalogCard 
+                key={product.id}
+                title={product.name}
+                category={product.kind}
+                price={`From £${product.basePrice} / 100 units`}
+                imageUrl={product.image || "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1600"}
+                href={`/products/${product.id}`}
+              />
+            ))}
           </div>
         </div>
       </section>

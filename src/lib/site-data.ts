@@ -12,6 +12,7 @@ export type ProductOption = {
   leadTime: string;
   accent: string;
   finish: string;
+  image: string;
 };
 
 export type PendingOrder = {
@@ -46,6 +47,7 @@ export const products: ProductOption[] = [
     leadTime: "10-14 working days",
     accent: "#c96f43",
     finish: "Matte kraft finish",
+    image: "/images/beveragpackaging.png",
   },
   {
     id: "salad-bowl",
@@ -57,6 +59,7 @@ export const products: ProductOption[] = [
     leadTime: "12-16 working days",
     accent: "#6b8f71",
     finish: "Food-safe PE lining",
+    image: "/images/ecomm.png",
   },
   {
     id: "burger-box",
@@ -68,6 +71,7 @@ export const products: ProductOption[] = [
     leadTime: "10-12 working days",
     accent: "#5f5f8d",
     finish: "Grease-resistant board",
+    image: "/images/foodpackaging.png",
   },
   {
     id: "carrier-bag",
@@ -79,6 +83,7 @@ export const products: ProductOption[] = [
     leadTime: "7-10 working days",
     accent: "#835c3b",
     finish: "Twisted paper handles",
+    image: "/images/retail.png",
   },
 ];
 
