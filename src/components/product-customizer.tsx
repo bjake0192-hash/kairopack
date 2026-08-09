@@ -11,6 +11,7 @@ import {
   type LogoPlacement,
   type ProductKind,
 } from "@/lib/site-data";
+import { PackagingPreview3D } from "./packaging-preview-3d";
 
 type OrderFormState = {
   buyerName: string;
@@ -73,6 +74,7 @@ export function ProductCustomizer({ productId }: { productId: string }) {
   const [orderForm, setOrderForm] = useState<OrderFormState>(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
+  const [viewMode, setViewMode] = useState<"2D" | "3D">("3D");
 
   const product = useMemo(
     () => products.find((item) => item.id === productId) ?? products[0],
@@ -200,11 +202,31 @@ export function ProductCustomizer({ productId }: { productId: string }) {
 
         {/* Live Preview */}
         <section>
-          <div className="mb-6">
-            <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight mb-2">Live Preview</h2>
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">Live Preview</h2>
+            
+            <div className="flex bg-[#E7E7E7]/50 p-1 rounded-lg">
+              <button 
+                onClick={() => setViewMode("2D")}
+                className={`px-4 py-1.5 text-xs font-bold tracking-wider uppercase rounded-md transition-colors ${viewMode === "2D" ? "bg-white shadow-sm text-[#0B0B0B]" : "text-[#71717A] hover:text-[#0B0B0B]"}`}
+              >
+                Photo
+              </button>
+              <button 
+                onClick={() => setViewMode("3D")}
+                className={`px-4 py-1.5 text-xs font-bold tracking-wider uppercase rounded-md transition-colors ${viewMode === "3D" ? "bg-white shadow-sm text-[#0B0B0B]" : "text-[#71717A] hover:text-[#0B0B0B]"}`}
+              >
+                3D Interactive
+              </button>
+            </div>
           </div>
-          <div className="rounded-[16px] bg-[#F7F5F1] border border-[#E7E7E7] overflow-hidden relative flex flex-col items-center justify-center min-h-[400px] lg:min-h-[500px]">
-            <PackagingPreview kind={product.kind} placement={placement} logoPreview={logoPreview} />
+          
+          <div className="rounded-[16px] bg-[#F7F5F1] border border-[#E7E7E7] overflow-hidden relative flex flex-col items-center justify-center min-h-[500px]">
+            {viewMode === "2D" ? (
+              <PackagingPreview kind={product.kind} placement={placement} logoPreview={logoPreview} />
+            ) : (
+              <PackagingPreview3D kind={product.kind} accent={product.accent} placement={placement} logoPreview={logoPreview} />
+            )}
             
             {/* Preview Controls */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full border border-[#E7E7E7] shadow-sm">
