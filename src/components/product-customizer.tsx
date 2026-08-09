@@ -176,34 +176,13 @@ export function ProductCustomizer({ productId }: { productId: string }) {
       {/* LEFT PANEL: Workspace */}
       <div className="flex flex-col gap-16">
         
-        {/* Logo Upload */}
-        <section>
-          <div className="mb-6">
-            <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">02 / Customise</p>
-            <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight mb-2">Upload your logo</h2>
-            <p className="text-[#71717A] text-sm">PNG, SVG, PDF or AI. Maximum file size: 10MB</p>
-          </div>
-          <label className="relative flex flex-col items-center justify-center rounded-[16px] border-2 border-dashed border-[#E7E7E7] bg-white p-10 cursor-pointer hover:bg-[#F7F5F1] hover:border-[#0B0B0B]/20 transition-all group">
-            <div className="w-14 h-14 rounded-full bg-[#F7F5F1] flex items-center justify-center mb-4 text-[#0B0B0B] group-hover:text-[#C49A62] group-hover:bg-[#C49A62]/10 transition-colors">
-              <UploadCloud className="w-6 h-6" />
-            </div>
-            <span className="text-sm font-bold text-[#0B0B0B] mb-1">Choose file</span>
-            <span className="text-xs text-[#71717A]">or drag and drop</span>
-            <input type="file" accept="image/*" className="hidden" onChange={handleLogoUpload} />
-            {logoName && (
-              <div className="absolute inset-0 bg-white/95 backdrop-blur-sm rounded-[16px] flex flex-col items-center justify-center p-6 border border-[#C49A62]">
-                <CheckCircle2 className="w-8 h-8 text-[#C49A62] mb-3" />
-                <p className="text-sm font-bold text-[#0B0B0B] truncate max-w-full px-4">{logoName}</p>
-                <p className="text-xs text-[#71717A] mt-2 underline">Click to replace</p>
-              </div>
-            )}
-          </label>
-        </section>
-
         {/* Live Preview */}
         <section>
           <div className="mb-6 flex items-center justify-between">
-            <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">Live Preview</h2>
+            <div>
+              <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">02 / Customise</p>
+              <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">Live Preview</h2>
+            </div>
             
             <div className="flex bg-[#E7E7E7]/50 p-1 rounded-lg">
               <button 
@@ -300,33 +279,6 @@ export function ProductCustomizer({ productId }: { productId: string }) {
         <div>
           <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">03 / QUOTE & ORDER</p>
           <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">Production details</h2>
-        </div>
-
-        {/* Logo Placement */}
-        <div>
-          <p className="text-xs font-bold text-[#0B0B0B] mb-3 uppercase tracking-widest">Logo placement</p>
-          <div className="grid gap-3">
-            {placementOptions.map((option) => {
-              const isSelected = option.value === placement;
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => setPlacement(option.value)}
-                  className={`relative rounded-[10px] border px-4 py-3 flex items-center justify-between transition-all duration-300 ${
-                    isSelected
-                      ? "border-[#0B0B0B] bg-[#0B0B0B] text-white"
-                      : "border-[#E7E7E7] bg-white text-[#0B0B0B] hover:border-[#0B0B0B]/30"
-                  }`}
-                >
-                  <span className="text-sm font-semibold relative z-10">{option.label}</span>
-                  <span className={`text-xs font-medium relative z-10 ${isSelected ? "text-[#C49A62]" : "text-[#71717A]"}`}>
-                    {option.fee === 0 ? "Included" : `+${currency.format(option.fee)} / 100`}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* Quantity */}
