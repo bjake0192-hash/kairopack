@@ -26,18 +26,11 @@ const currency = new Intl.NumberFormat("en-GB", {
   maximumFractionDigits: 0,
 });
 
-const productImages: Record<string, string> = {
-  "double-wall-cup": "https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&q=80&w=600",
-  "salad-bowl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600",
-  "burger-box": "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=600",
-  "carrier-bag": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600"
-};
-
 const previewImages: Record<ProductKind, string> = {
   cup: "https://images.unsplash.com/photo-1550907589-94073b64c0db?auto=format&fit=crop&q=80&w=1200", // Dark takeaway cup
-  bowl: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=1200", // Salad bowl
+  bowl: "/images/ecomm.png", // E-commerce / Salad bowl
   box: "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=1200", // Burger box
-  bag: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200", // Carrier bag
+  bag: "/images/retail.png", // Carrier bag
 };
 
 const logoPositions: Record<ProductKind, Record<LogoPlacement, string>> = {
@@ -71,20 +64,19 @@ const emptyForm: OrderFormState = {
   notes: "",
 };
 
-export function ProductCustomizer() {
-  const [selectedProductId, setSelectedProductId] = useState(products[0].id);
+export function ProductCustomizer({ productId }: { productId: string }) {
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
   const [logoName, setLogoName] = useState("");
   const [placement, setPlacement] = useState<LogoPlacement>("middle");
-  const [quantity, setQuantity] = useState(products[0].minOrder);
+  const [quantity, setQuantity] = useState(products.find(p => p.id === productId)?.minOrder || 500);
   const [customDesign, setCustomDesign] = useState(false);
   const [orderForm, setOrderForm] = useState<OrderFormState>(emptyForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
   const product = useMemo(
-    () => products.find((item) => item.id === selectedProductId) ?? products[0],
-    [selectedProductId],
+    () => products.find((item) => item.id === productId) ?? products[0],
+    [productId],
   );
 
   const placementMeta = placementOptions.find((option) => option.value === placement) ?? placementOptions[1];
@@ -100,17 +92,6 @@ export function ProductCustomizer() {
       total,
     };
   }, [customDesign, placementMeta.fee, product.basePrice, quantity]);
-
-  function handleProductChange(nextProductId: string) {
-    const nextProduct = products.find((item) => item.id === nextProductId);
-    if (!nextProduct) {
-      return;
-    }
-
-    setSelectedProductId(nextProductId);
-    setQuantity((currentQuantity) => Math.max(currentQuantity, nextProduct.minOrder));
-    setSubmitMessage("");
-  }
 
   function handleLogoUpload(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
@@ -193,58 +174,10 @@ export function ProductCustomizer() {
       {/* LEFT PANEL: Workspace */}
       <div className="flex flex-col gap-16">
         
-        {/* Product Selection */}
-        <section>
-          <div className="mb-8">
-            <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">01 / Select Product</p>
-            <h2 className="text-3xl font-bold text-[#0B0B0B] tracking-tight mb-2">Select a product</h2>
-            <p className="text-[#71717A] text-base">Choose the packaging format that best suits your product.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-4">
-            {products.map((item) => {
-              const isSelected = item.id === product.id;
-
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => handleProductChange(item.id)}
-                  className={`group relative text-left transition-all duration-300 overflow-hidden flex flex-col rounded-[16px] border ${
-                    isSelected
-                      ? "border-[#C49A62] bg-[#0B0B0B] text-white"
-                      : "border-[#E7E7E7] bg-white text-[#0B0B0B] hover:border-[#0B0B0B]/30"
-                  }`}
-                >
-                  <div className="relative w-full aspect-[4/3] bg-[#E9E0D4] overflow-hidden">
-                    <Image
-                      src={productImages[item.id] || "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=400"}
-                      alt={item.name}
-                      fill
-                      className={`object-cover transition-transform duration-700 ${isSelected ? 'scale-105' : 'group-hover:scale-105'}`}
-                      unoptimized
-                    />
-                    {isSelected && (
-                      <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-[#C49A62] text-white flex items-center justify-center shadow-md">
-                        <CheckCircle2 className="w-4 h-4" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-5 relative z-10 flex-1 flex flex-col justify-center">
-                    <p className="text-sm font-bold tracking-tight uppercase mb-1">{item.name}</p>
-                    <p className={`text-xs leading-relaxed ${isSelected ? "text-white/70" : "text-[#71717A]"}`}>
-                      {item.description}
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
         {/* Logo Upload */}
         <section>
           <div className="mb-6">
+            <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">02 / Customise</p>
             <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight mb-2">Upload your logo</h2>
             <p className="text-[#71717A] text-sm">PNG, SVG, PDF or AI. Maximum file size: 10MB</p>
           </div>
@@ -343,7 +276,7 @@ export function ProductCustomizer() {
       <div className="lg:sticky lg:top-32 flex flex-col gap-8 bg-white rounded-[16px] border border-[#E7E7E7] p-8 lg:p-10 shadow-sm">
         
         <div>
-          <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">02 / QUOTE & ORDER</p>
+          <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">03 / QUOTE & ORDER</p>
           <h2 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">Production details</h2>
         </div>
 

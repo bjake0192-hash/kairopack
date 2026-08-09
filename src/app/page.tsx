@@ -42,7 +42,7 @@ export default function Home() {
                 Explore Solutions <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
               <Link
-                href="/customizer"
+                href="/products"
                 className="inline-flex h-14 items-center justify-center border border-white/20 bg-transparent px-8 text-sm font-semibold text-white transition-colors hover:bg-white/10"
               >
                 Get a Quote
@@ -144,24 +144,28 @@ export default function Home() {
               title="Food Packaging"
               description="Boxes, bowls, bags and more."
               image="/images/foodpackaging.png"
+              href="/products/burger-box"
             />
             <ProductCard 
               category="BEVERAGE PACKAGING"
               title="Beverage Packaging"
               description="Cups, sleeves and carriers."
               image="/images/beveragpackaging.png"
+              href="/products/double-wall-cup"
             />
             <ProductCard 
               category="RETAIL PACKAGING"
               title="Retail Packaging"
               description="Boxes and wraps that build brand value."
-              image="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800"
+              image="/images/retail.png"
+              href="/products/carrier-bag"
             />
             <ProductCard 
               category="E-COMMERCE PACKAGING"
               title="E-Commerce Packaging"
               description="Protective, durable packaging made to impress."
-              image="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=800"
+              image="/images/ecomm.png"
+              href="/products/salad-bowl"
             />
           </div>
         </div>
@@ -327,25 +331,25 @@ function SolutionCard({ icon, title, description }: { icon: React.ReactNode; tit
   );
 }
 
-function ProductCard({ category, title, description, image }: { category: string; title: string; description: string; image: string }) {
+function ProductCard({ category, title, description, image, href = "/products" }: { category: string; title: string; description: string; image: string; href?: string }) {
   return (
-    <Link href="/products" className="group block">
-      <div className="relative aspect-[4/5] bg-[#E9E0D4] overflow-hidden mb-6">
+    <Link href={href} className="group block bg-white rounded-[16px] overflow-hidden border border-[#E7E7E7] hover:border-[#0B0B0B]/20 hover:shadow-md transition-all">
+      <div className="relative aspect-[4/5] bg-[#E9E0D4] overflow-hidden border-b border-[#E7E7E7]">
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.2,1)]"
+          className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
           unoptimized
         />
       </div>
-      <div className="bg-white">
-        <p className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-2">{category}</p>
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold text-[#0B0B0B] tracking-tight group-hover:text-[#C49A62] transition-colors">{title}</h3>
-          <ArrowRight className="w-5 h-5 text-[#0B0B0B] opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+      <div className="p-8">
+        <div className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">{category}</div>
+        <h3 className="text-xl font-bold text-[#0B0B0B] mb-2 group-hover:text-[#C49A62] transition-colors">{title}</h3>
+        <p className="text-[#71717A] text-sm leading-relaxed mb-6">{description}</p>
+        <div className="flex items-center text-sm font-semibold text-[#0B0B0B] group-hover:text-[#C49A62] transition-colors">
+          Configure <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
-        <p className="text-[#71717A] text-sm mt-2">{description}</p>
       </div>
     </Link>
   );

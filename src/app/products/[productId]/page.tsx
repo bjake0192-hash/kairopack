@@ -1,8 +1,16 @@
 import { ProductCustomizer } from "@/components/product-customizer";
 import Image from "next/image";
 import { Eye, ShieldCheck, Truck, Sparkles } from "lucide-react";
+import { products } from "@/lib/site-data";
+import { notFound } from "next/navigation";
 
-export default function CustomizerPage() {
+export default function CustomizerPage({ params }: { params: { productId: string } }) {
+  const product = products.find((p) => p.id === params.productId);
+
+  if (!product) {
+    notFound();
+  }
+
   return (
     <main className="flex flex-col min-h-screen bg-[#F7F5F1] text-[#0B0B0B]">
       {/* CONFIGURATOR HERO */}
@@ -27,7 +35,7 @@ export default function CustomizerPage() {
             Design your packaging.
           </h1>
           <p className="text-[#E7E7E7] text-lg leading-relaxed max-w-md font-light">
-            Select a product, upload your logo, and create a production-ready packaging brief.
+            Upload your logo, configure your options, and create a production-ready packaging brief.
           </p>
         </div>
       </section>
@@ -35,12 +43,12 @@ export default function CustomizerPage() {
       {/* PROGRESS INDICATOR */}
       <div className="border-b border-[#E7E7E7] bg-white">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-12 flex gap-8 py-5 overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase whitespace-nowrap">
-            <span className="text-[#C49A62]">01</span>
+          <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase whitespace-nowrap opacity-60">
+            <span className="text-[#0B0B0B]">01</span>
             <span className="text-[#0B0B0B]">PRODUCT</span>
           </div>
-          <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase whitespace-nowrap opacity-60">
-            <span className="text-[#0B0B0B]">02</span>
+          <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase whitespace-nowrap">
+            <span className="text-[#C49A62]">02</span>
             <span className="text-[#0B0B0B]">CUSTOMISE</span>
           </div>
           <div className="flex items-center gap-2 text-sm font-bold tracking-widest uppercase whitespace-nowrap opacity-60">
@@ -57,7 +65,7 @@ export default function CustomizerPage() {
       {/* MAIN WORKSPACE */}
       <section className="py-12 lg:py-16 px-6 lg:px-12 flex-1">
         <div className="max-w-[1400px] mx-auto">
-          <ProductCustomizer />
+          <ProductCustomizer productId={product.id} />
         </div>
       </section>
 

@@ -4,66 +4,55 @@ import { ArrowRight } from "lucide-react";
 
 export default function ProductsPage() {
   return (
-    <main className="flex flex-col min-h-screen bg-zinc-50 pt-24">
-      <section className="py-12 bg-white border-b border-zinc-200">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+    <main className="flex flex-col min-h-screen bg-[#F7F5F1] pt-24">
+      <section className="py-12 bg-white border-b border-[#E7E7E7]">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
-              <h1 className="text-4xl font-bold tracking-tight text-zinc-950 mb-4">
+              <p className="text-[#C49A62] text-[11px] font-bold uppercase tracking-[0.25em] mb-4">
                 Our Catalog
+              </p>
+              <h1 className="text-4xl font-bold tracking-tight text-[#0B0B0B] mb-4">
+                Packaging Solutions
               </h1>
-              <p className="text-zinc-600 text-lg max-w-2xl">
+              <p className="text-[#71717A] text-lg max-w-2xl">
                 Industry-standard vessels and wraps ready for your branding. Explore our complete range of premium catering packaging.
               </p>
             </div>
-            <Link
-              href="/customizer"
-              className="text-sm font-medium text-zinc-900 hover:text-zinc-600 transition-colors flex items-center gap-1"
-            >
-              Go to Customizer <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-zinc-50 flex-1">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <section className="py-16 bg-[#F7F5F1] flex-1">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <CatalogCard 
-              title="Double Wall Cup"
+              title="Double Wall Coffee Cup"
               category="Hot Service"
               price="From £145 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&q=80&w=800"
+              imageUrl="/images/beveragpackaging.png"
+              href="/products/double-wall-cup"
             />
             <CatalogCard 
-              title="Kraft Salad Bowl"
+              title="Custom Salad Bowl"
               category="Cold Service"
               price="From £168 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800"
+              imageUrl="/images/ecomm.png"
+              href="/products/salad-bowl"
             />
             <CatalogCard 
-              title="Premium Burger Box"
+              title="Burger & Meal Box"
               category="Takeaway"
               price="From £182 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=800"
+              imageUrl="/images/foodpackaging.png"
+              href="/products/burger-box"
             />
             <CatalogCard 
-              title="Twisted Handle Carrier"
+              title="Luxury Carrier Bag"
               category="Transit"
               price="From £128 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=800"
-            />
-            <CatalogCard 
-              title="Clear PET Cold Cup"
-              category="Cold Drinks"
-              price="From £135 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&q=80&w=800"
-            />
-            <CatalogCard 
-              title="Greaseproof Wrap"
-              category="Liners"
-              price="From £85 / 100 units"
-              imageUrl="https://images.unsplash.com/photo-1585032226651-72462e0c2e2e?auto=format&fit=crop&q=80&w=800"
+              imageUrl="/images/retail.png"
+              href="/products/carrier-bag"
             />
           </div>
         </div>
@@ -72,10 +61,10 @@ export default function ProductsPage() {
   );
 }
 
-function CatalogCard({ title, category, price, imageUrl }: { title: string, category: string, price: string, imageUrl: string }) {
+function CatalogCard({ title, category, price, imageUrl, href }: { title: string, category: string, price: string, imageUrl: string, href: string }) {
   return (
-    <Link href="/customizer" className="group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-zinc-300 hover:shadow-md transition-all">
-      <div className="relative aspect-[4/3] bg-zinc-100 overflow-hidden border-b border-zinc-100">
+    <Link href={href} className="group block bg-white rounded-[16px] overflow-hidden border border-[#E7E7E7] hover:border-[#0B0B0B]/20 hover:shadow-md transition-all">
+      <div className="relative aspect-[4/3] bg-[#E9E0D4] overflow-hidden border-b border-[#E7E7E7]">
         <Image
           src={imageUrl}
           alt={title}
@@ -84,10 +73,13 @@ function CatalogCard({ title, category, price, imageUrl }: { title: string, cate
           unoptimized
         />
       </div>
-      <div className="p-6">
-        <div className="text-xs font-medium text-zinc-500 mb-2 uppercase tracking-wider">{category}</div>
-        <h3 className="text-lg font-semibold text-zinc-950 mb-2 group-hover:text-zinc-700 transition-colors">{title}</h3>
-        <p className="text-sm text-zinc-600 font-medium">{price}</p>
+      <div className="p-8">
+        <div className="text-[#C49A62] text-[10px] font-bold uppercase tracking-[0.2em] mb-3">{category}</div>
+        <h3 className="text-xl font-bold text-[#0B0B0B] mb-2 group-hover:text-[#C49A62] transition-colors">{title}</h3>
+        <p className="text-sm text-[#71717A] font-medium mb-6">{price}</p>
+        <div className="flex items-center text-sm font-semibold text-[#0B0B0B] group-hover:text-[#C49A62] transition-colors">
+          Configure <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </div>
       </div>
     </Link>
   );
