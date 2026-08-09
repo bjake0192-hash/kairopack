@@ -241,15 +241,29 @@ export function AdminDashboard() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-[#0B0B0B] mb-2">Image URL</label>
-                <input 
-                  required
-                  type="text" 
-                  value={editingProduct.image || ""}
-                  onChange={(e) => setEditingProduct({...editingProduct, image: e.target.value})}
-                  placeholder="/images/your-product.jpg"
-                  className="w-full p-3 text-sm border border-[#E7E7E7] rounded-lg focus:outline-none focus:border-[#C49A62]"
-                />
+                <label className="block text-sm font-semibold text-[#0B0B0B] mb-2">Product Image</label>
+                <div className="flex items-center gap-4">
+                  {editingProduct.image && (
+                    <div className="relative w-16 h-16 rounded-lg overflow-hidden border border-[#E7E7E7] shrink-0">
+                      <Image src={editingProduct.image} alt="Preview" fill className="object-cover" />
+                    </div>
+                  )}
+                  <input 
+                    type="file" 
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setEditingProduct({...editingProduct, image: reader.result as string});
+                        };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="w-full text-sm text-[#71717A] file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#0B0B0B] file:text-white hover:file:bg-[#151515] file:cursor-pointer cursor-pointer border border-[#E7E7E7] rounded-lg p-1.5 focus:outline-none focus:border-[#C49A62]"
+                  />
+                </div>
               </div>
 
               <div className="flex justify-end gap-4 mt-4">
