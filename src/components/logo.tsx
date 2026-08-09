@@ -10,6 +10,7 @@ export function Logo({ className = "h-10 w-[180px]" }: { className?: string }) {
         fill
         className="object-contain object-left"
         priority
+        unoptimized
       />
     </div>
   );
