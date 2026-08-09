@@ -304,7 +304,7 @@ export default function Home() {
           </div>
           <div className="relative h-[300px] lg:h-auto order-1 lg:order-2">
             <Image
-              src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&q=80&w=1600"
+              src="/images/home-gallery.jpg"
               alt="Open premium custom packaging box"
               fill
               className="object-cover object-center"

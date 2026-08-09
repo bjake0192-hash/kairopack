@@ -21,7 +21,7 @@ export default async function CustomizerPage({ params }: { params: Promise<{ pro
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent z-10" />
           <Image
-            src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1600"
+            src="/images/product-default.jpg"
             alt="Premium custom packaging on dark studio surface"
             fill
             className="object-cover object-right opacity-60"

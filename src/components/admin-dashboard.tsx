@@ -28,7 +28,7 @@ export function AdminDashboard() {
         leadTime: "10-14 working days",
         accent: "#000000",
         finish: "Standard finish",
-        image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1600"
+        image: "/images/product-default.jpg"
       });
     }
     setIsModalOpen(true);
@@ -247,7 +247,7 @@ export function AdminDashboard() {
                   type="text" 
                   value={editingProduct.image || ""}
                   onChange={(e) => setEditingProduct({...editingProduct, image: e.target.value})}
-                  placeholder="https://images.unsplash.com/..."
+                  placeholder="/images/your-product.jpg"
                   className="w-full p-3 text-sm border border-[#E7E7E7] rounded-lg focus:outline-none focus:border-[#C49A62]"
                 />
               </div>

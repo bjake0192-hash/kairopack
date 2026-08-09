@@ -33,7 +33,7 @@ export default function ProductsPage() {
                 title={product.name}
                 category={product.kind}
                 price={`From £${product.basePrice} / 100 units`}
-                imageUrl={product.image || "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1600"}
+                imageUrl={product.image || "/images/product-default.jpg"}
                 href={`/products/${product.id}`}
               />
             ))}

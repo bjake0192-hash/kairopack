@@ -9,7 +9,7 @@ export default function SustainabilityPage() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop"
+            src="/images/sustain-hero.jpg"
             alt="Sustainable environment"
             fill
             className="object-cover brightness-[0.3]"
@@ -91,7 +91,7 @@ export default function SustainabilityPage() {
             </div>
             <div className="relative aspect-square lg:aspect-[4/3] bg-[#151515] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1605600659908-0ef719419d41?q=80&w=1200&auto=format&fit=crop"
+                src="/images/sustain-kraft.jpg"
                 alt="Recycled Kraft Cardboard"
                 fill
                 className="object-cover"

@@ -120,7 +120,7 @@ export default function ContactPage() {
       {/* Image Banner */}
       <section className="h-[40vh] min-h-[300px] relative">
         <Image
-          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop"
+          src="/images/contact-hero.jpg"
           alt="Modern architecture"
           fill
           className="object-cover"

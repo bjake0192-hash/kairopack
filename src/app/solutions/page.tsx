@@ -9,7 +9,7 @@ export default function SolutionsPage() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2000&auto=format&fit=crop"
+            src="/images/solutions-hero.jpg"
             alt="Premium custom packaging solutions"
             fill
             className="object-cover brightness-50"
@@ -85,7 +85,7 @@ export default function SolutionsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="group relative aspect-[4/3] overflow-hidden bg-[#E7E7E7]">
               <Image
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop"
+                src="/images/solution-rigid.jpg"
                 alt="Rigid Boxes"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -99,7 +99,7 @@ export default function SolutionsPage() {
             
             <div className="group relative aspect-[4/3] overflow-hidden bg-[#E7E7E7]">
               <Image
-                src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1200&auto=format&fit=crop"
+                src="/images/solution-folding.jpg"
                 alt="Folding Cartons"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -113,7 +113,7 @@ export default function SolutionsPage() {
 
             <div className="group relative aspect-[4/3] overflow-hidden bg-[#E7E7E7]">
               <Image
-                src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1200&auto=format&fit=crop"
+                src="/images/solution-mailers.jpg"
                 alt="Mailers"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -127,7 +127,7 @@ export default function SolutionsPage() {
 
             <div className="group relative aspect-[4/3] overflow-hidden bg-[#E7E7E7]">
               <Image
-                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1200&auto=format&fit=crop"
+                src="/images/solution-pouches.jpg"
                 alt="Flexible Packaging"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

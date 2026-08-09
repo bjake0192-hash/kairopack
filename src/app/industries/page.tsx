@@ -9,7 +9,7 @@ export default function IndustriesPage() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?q=80&w=2000&auto=format&fit=crop"
+            src="/images/industries-hero.jpg"
             alt="Packaging across industries"
             fill
             className="object-cover brightness-[0.4]"
@@ -37,7 +37,7 @@ export default function IndustriesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative aspect-square lg:aspect-[4/3] bg-[#E7E7E7] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1559525839-b184a4d698c7?q=80&w=1200&auto=format&fit=crop"
+                src="/images/industry-food.jpg"
                 alt="Coffee Packaging"
                 fill
                 className="object-cover"
@@ -85,7 +85,7 @@ export default function IndustriesPage() {
             </div>
             <div className="relative aspect-square lg:aspect-[4/3] bg-[#E7E7E7] overflow-hidden order-1 lg:order-2">
               <Image
-                src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=1200&auto=format&fit=crop"
+                src="/images/industry-beauty.jpg"
                 alt="Cosmetics Packaging"
                 fill
                 className="object-cover"
@@ -97,7 +97,7 @@ export default function IndustriesPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="relative aspect-square lg:aspect-[4/3] bg-[#E7E7E7] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?q=80&w=1200&auto=format&fit=crop"
+                src="/images/industry-ecommerce.jpg"
                 alt="E-commerce Packaging"
                 fill
                 className="object-cover"
