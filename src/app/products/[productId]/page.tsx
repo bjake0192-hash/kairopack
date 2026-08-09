@@ -4,6 +4,8 @@ import { Eye, ShieldCheck, Truck, Sparkles } from "lucide-react";
 import { products } from "@/lib/site-data";
 import { notFound } from "next/navigation";
 
+export const runtime = "edge";
+
 export default function CustomizerPage({ params }: { params: { productId: string } }) {
   const product = products.find((p) => p.id === params.productId);
 
