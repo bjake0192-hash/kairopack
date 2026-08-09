@@ -295,7 +295,7 @@ export default function Home() {
             </p>
             <div>
               <Link
-                href="/customizer"
+                href="/products"
                 className="inline-flex h-14 items-center justify-center bg-[#0B0B0B] px-8 text-sm font-semibold text-white transition-colors hover:bg-[#151515]"
               >
                 Get Your Custom Quote <ArrowRight className="ml-2 w-4 h-4" />

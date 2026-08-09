@@ -48,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             
             <div className="flex items-center gap-6">
               <Link
-                href="/customizer"
+                href="/products"
                 className="hidden md:inline-flex h-11 items-center justify-center rounded-none bg-white px-8 text-sm font-semibold text-[#0B0B0B] transition-colors hover:bg-[#E7E7E7]"
               >
                 Get a Quote
@@ -86,7 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <li><Link href="/products" className="hover:text-white transition-colors">Beverage Packaging</Link></li>
                 <li><Link href="/products" className="hover:text-white transition-colors">Retail Packaging</Link></li>
                 <li><Link href="/products" className="hover:text-white transition-colors">E-Commerce Packaging</Link></li>
-                <li><Link href="/customizer" className="hover:text-[#C49A62] transition-colors">Custom Solutions</Link></li>
+                <li><Link href="/products" className="hover:text-[#C49A62] transition-colors">Custom Solutions</Link></li>
               </ul>
             </div>
 
