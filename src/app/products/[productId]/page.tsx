@@ -6,8 +6,9 @@ import { notFound } from "next/navigation";
 
 export const runtime = "edge";
 
-export default function CustomizerPage({ params }: { params: { productId: string } }) {
-  const product = products.find((p) => p.id === params.productId);
+export default async function CustomizerPage({ params }: { params: Promise<{ productId: string }> }) {
+  const { productId } = await params;
+  const product = products.find((p) => p.id === productId);
 
   if (!product) {
     notFound();

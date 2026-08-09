@@ -39,11 +39,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             
             <nav className="hidden lg:flex items-center gap-8 text-sm font-medium tracking-wide">
               <Link href="/products" className="hover:text-[#C49A62] transition-colors duration-300">Products</Link>
-              <Link href="/#solutions" className="hover:text-[#C49A62] transition-colors duration-300">Solutions</Link>
-              <Link href="/#industries" className="hover:text-[#C49A62] transition-colors duration-300">Industries</Link>
-              <Link href="/#sustainability" className="hover:text-[#C49A62] transition-colors duration-300">Sustainability</Link>
-              <Link href="/#about" className="hover:text-[#C49A62] transition-colors duration-300">About Us</Link>
-              <Link href="/#contact" className="hover:text-[#C49A62] transition-colors duration-300">Contact</Link>
+              <Link href="/solutions" className="hover:text-[#C49A62] transition-colors duration-300">Solutions</Link>
+              <Link href="/industries" className="hover:text-[#C49A62] transition-colors duration-300">Industries</Link>
+              <Link href="/sustainability" className="hover:text-[#C49A62] transition-colors duration-300">Sustainability</Link>
+              <Link href="/about" className="hover:text-[#C49A62] transition-colors duration-300">About Us</Link>
+              <Link href="/contact" className="hover:text-[#C49A62] transition-colors duration-300">Contact</Link>
             </nav>
             
             <div className="flex items-center gap-6">
@@ -93,20 +93,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>
               <h4 className="text-xs font-bold tracking-widest text-[#E7E7E7] mb-6 uppercase">Solutions</h4>
               <ul className="space-y-4 text-sm text-[#A1A1AA]">
-                <li><Link href="#" className="hover:text-white transition-colors">By Industry</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Sustainability</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Design Support</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Production & Quality</Link></li>
+                <li><Link href="/industries" className="hover:text-white transition-colors">By Industry</Link></li>
+                <li><Link href="/sustainability" className="hover:text-white transition-colors">Sustainability</Link></li>
+                <li><Link href="/solutions" className="hover:text-white transition-colors">Design Support</Link></li>
+                <li><Link href="/solutions" className="hover:text-white transition-colors">Production & Quality</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-xs font-bold tracking-widest text-[#E7E7E7] mb-6 uppercase">Company</h4>
               <ul className="space-y-4 text-sm text-[#A1A1AA]">
-                <li><Link href="#" className="hover:text-white transition-colors">About Us</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Our Process</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Case Studies</Link></li>
-                <li><Link href="#" className="hover:text-white transition-colors">Contact</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">Our Process</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">Case Studies</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               </ul>
             </div>
           </div>
