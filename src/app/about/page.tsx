@@ -99,6 +99,36 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Global Reach */}
+      <section className="py-24 px-6 lg:px-12 bg-white">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="order-2 lg:order-1 relative aspect-[4/3] overflow-hidden">
+              <Image
+                src="/images/map.png"
+                alt="Global Operations Map"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <p className="text-[#C49A62] text-[11px] font-bold uppercase tracking-[0.25em] mb-4">
+                Global Operations
+              </p>
+              <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-8 text-[#0B0B0B]">
+                Borderless manufacturing.
+              </h2>
+              <p className="text-[#71717A] text-lg mb-6 leading-relaxed">
+                While our roots are in the design studio, our reach spans the globe. We have established a robust, vetted network of manufacturing partners across North America, Europe, and Asia.
+              </p>
+              <p className="text-[#71717A] text-lg leading-relaxed">
+                This distributed supply chain allows us to optimize for cost, speed, and specialized capabilities—ensuring your packaging is produced efficiently and delivered exactly where it needs to be, without compromising on quality.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-24 px-6 lg:px-12 bg-[#0B0B0B] text-white">
         <div className="max-w-[800px] mx-auto text-center">
