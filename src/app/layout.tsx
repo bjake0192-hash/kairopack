@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="flex h-20 items-center justify-between px-6 lg:px-12 w-full mx-auto">
             <div className="flex items-center">
               <Link href="/" className="hover:opacity-70 transition-opacity duration-300">
-                <Logo className="h-8 w-[160px]" />
+                <Logo className="h-16 w-[320px]" />
               </Link>
             </div>
             
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="bg-[#0B0B0B] text-white pt-24 pb-12 px-6 lg:px-12 border-t border-white/10">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-20">
             <div className="lg:col-span-2">
-              <Logo className="h-8 w-[160px] mb-6" />
+              <Logo className="h-16 w-[320px] mb-6" />
               <p className="text-[#E7E7E7] text-sm leading-relaxed max-w-sm mb-8">
                 Custom packaging solutions that elevate your brand. We combine creativity, quality and sustainability to deliver packaging that makes an impact.
               </p>
