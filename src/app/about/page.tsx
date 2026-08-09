@@ -9,7 +9,7 @@ export default function AboutPage() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1541628951107-a5af53bdc8d4?q=80&w=2000&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2000&auto=format&fit=crop"
             alt="Printing press machinery"
             fill
             className="object-cover brightness-50"
@@ -49,7 +49,7 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[4/3] bg-[#E7E7E7] overflow-hidden">
               <Image
-                src="https://images.unsplash.com/photo-1587324438673-56c808f921d2?q=80&w=1200&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?q=80&w=1200&auto=format&fit=crop"
                 alt="Craftsmanship and production"
                 fill
                 className="object-cover"

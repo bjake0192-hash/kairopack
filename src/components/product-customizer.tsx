@@ -28,7 +28,7 @@ const currency = new Intl.NumberFormat("en-GB", {
 });
 
 const previewImages: Record<ProductKind, string> = {
-  cup: "https://images.unsplash.com/photo-1550907589-94073b64c0db?auto=format&fit=crop&q=80&w=1200", // Dark takeaway cup
+  cup: "https://images.unsplash.com/photo-1512418490979-92798cec1380?auto=format&fit=crop&q=80&w=1200", // Dark takeaway cup
   bowl: "/images/ecomm.png", // E-commerce / Salad bowl
   box: "https://images.unsplash.com/photo-1626844131082-256783844137?auto=format&fit=crop&q=80&w=1200", // Burger box
   bag: "/images/retail.png", // Carrier bag

@@ -9,7 +9,7 @@ export default function IndustriesPage() {
       <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1610419266652-30018a38a7b3?q=80&w=2000&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?q=80&w=2000&auto=format&fit=crop"
             alt="Packaging across industries"
             fill
             className="object-cover brightness-[0.4]"
